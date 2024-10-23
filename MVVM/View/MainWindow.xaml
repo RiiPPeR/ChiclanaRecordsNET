@@ -13,11 +13,13 @@
         AllowsTransparency="True"
         >
 
+
     <Border CornerRadius="10">
         <Border.Background>
-            <ImageBrush ImageSource="./Images/bg3.jpg"/>
+            <ImageBrush ImageSource="./../../Images/bg3.jpg"/>
         </Border.Background>
         <Grid>
+            
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
                 <RowDefinition/>
@@ -27,17 +29,15 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-
-
-
+            
             <Grid Grid.ColumnSpan="2"
                   MouseDown="Grid_MouseDown">
                 <Rectangle RadiusX="10" RadiusY="10">
                     <Rectangle.Fill>
-                        <SolidColorBrush Color="Black" Opacity="0.50"/>
+                        <SolidColorBrush Color="Black" Opacity="0.4"/>
                     </Rectangle.Fill>
                     <Rectangle.Effect>
-                        <BlurEffect Radius="5"/>
+                        <BlurEffect Radius="2"/>
                     </Rectangle.Effect>
                 </Rectangle>
 
@@ -131,26 +131,38 @@
                     </TextBlock>
 
 
-                    <Button Content="GitHub"
-                            Foreground="White"
+                    <Button Foreground="White"
                             FontSize="15"
                             FontWeight="Medium"
-                            Margin="5 ,5, 5, 5">
+                            Margin="5 ,5, 5, 5"
+                            Click="ButtonGitHub_Click">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="60"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Height="25" Width="25"
+                                   Source="./../../Images/githubwhite.png"
+                                   Grid.Column="0"/>
+                            <TextBlock Text="GitHub"
+                                       Grid.Column="1" Margin="0,6,0,-6"/>
+                        </Grid>
+
                         <Button.Style>
                             <Style TargetType="Button">
-                                <Setter Property="Background" Value="#010409"/>
+                                <Setter Property="Background" Value="#081f45"/>
                                 <Setter Property="Cursor" Value="Hand"/>
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#0D1117"/>
+                                        <Setter Property="Background" Value="#010409"/>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
                         </Button.Style>
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
-                                <Border Width="100" Height="30"
-                                        CornerRadius="12"
+                                <Border Width="120" Height="35"
+                                        CornerRadius="13"
                                         Background="{TemplateBinding Background}">
                                     <ContentPresenter VerticalAlignment="Center"
                                                       HorizontalAlignment="Center"/>
@@ -164,18 +176,75 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <Ellipse Fill="Red" 
-                                 Grid.Column="1" 
-                                 Height="20" 
-                                 Width="20" 
-                                 HorizontalAlignment="Right"
-                                 Margin="0, 0, 20, 0"
-                                 MouseDown="Ellipse_MouseDown"/>
+
+                        <Button Content="-"
+                            Foreground="White"
+                            FontSize="15"
+                            FontWeight="Medium"
+                            Margin="5 ,5, 5, 5"
+                            Grid.Column="2"
+                            Click="Button_Click_Minimize">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Orange"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="OrangeRed"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Width="30" Height="30"
+                                        CornerRadius="13"
+                                        Background="{TemplateBinding Background}">
+                                        <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+
+
+
+                        <Button Content="X"
+                            Foreground="White"
+                            FontSize="15"
+                            FontWeight="Medium"
+                            Margin="5 ,5, 5, 5"
+                            Grid.Column="3"
+                            Click="Button_Click_Close">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Red"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="DarkRed"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Width="30" Height="30"
+                                        CornerRadius="13"
+                                        Background="{TemplateBinding Background}">
+                                        <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+
 
                     </Grid>
-
                 </Grid>
             </Grid>
 
@@ -187,8 +256,31 @@
                            Foreground="White"
                            FontSize="50"
                            VerticalAlignment="Center"/>
+
                 </StackPanel>
+                <TextBlock Text="Vinyl record collection"
+                           Foreground="White"
+                           FontSize="30"
+                           VerticalAlignment="Center"/>
+
+                <Button Content="Home"
+                        Height="25"
+                        Command="{Binding NavigateToHomeCommand}"/>
+
+                <Button Content="Settings"
+                        Height="25"
+                        Command="{Binding NavigateToSettingsViewCommand}"/>
+
+                <Button Content="Login"
+                        Height="25"
+                        Command="{Binding NavigateToLoginCommand}"/>
             </StackPanel>
+
+            <ContentControl Grid.Row="1"
+                            Grid.Column="1"
+                            Content="{Binding Navigation.CurrentView}">
+                
+            </ContentControl>
 
         </Grid>
     </Border>
