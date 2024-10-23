@@ -5,10 +5,191 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChiclanaRecordsNET"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow" Height="800" Width="1280"
         WindowStyle="None"
-        ResizeMode="NoResize">
-    <Grid>
+        ResizeMode="NoResize"
+        FontFamily="./Font/Poppins/#Poppins"
+        Background="Transparent"
+        AllowsTransparency="True"
+        >
 
-    </Grid>
+    <Border CornerRadius="10">
+        <Border.Background>
+            <ImageBrush ImageSource="./Images/bg3.jpg"/>
+        </Border.Background>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+
+
+            <Grid Grid.ColumnSpan="2"
+                  MouseDown="Grid_MouseDown">
+                <Rectangle RadiusX="10" RadiusY="10">
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="Black" Opacity="0.50"/>
+                    </Rectangle.Fill>
+                    <Rectangle.Effect>
+                        <BlurEffect Radius="5"/>
+                    </Rectangle.Effect>
+                </Rectangle>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Chiclana Records"
+                               Foreground="White"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Grid.Column="1"
+                               FontSize="20"
+                               MouseDown="TextBlock_MouseDown">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver"
+                                             Value="True">
+                                        <Setter Property="Effect">
+                                            <Setter.Value>
+                                                <DropShadowEffect ShadowDepth="1" 
+                                                                  Color="White" 
+                                                                  Opacity="1" 
+                                                                  BlurRadius="10"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+
+                    <TextBlock Text="Mi Colección"
+                               Foreground="White"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Grid.Column="2"
+                               FontSize="20"
+                               MouseDown="TextBlock_MouseDown">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver"
+                                             Value="True">
+                                        <Setter Property="Effect">
+                                            <Setter.Value>
+                                                <DropShadowEffect ShadowDepth="1" 
+                                                                  Color="White" 
+                                                                  Opacity="1" 
+                                                                  BlurRadius="10"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+
+                    <TextBlock Text="Colecciones"
+                               Foreground="White"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Grid.Column="3"
+                               FontSize="20"
+                               MouseDown="TextBlock_MouseDown">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver"
+                                             Value="True">
+                                        <Setter Property="Effect">
+                                            <Setter.Value>
+                                                <DropShadowEffect ShadowDepth="1" 
+                                                                  Color="White" 
+                                                                  Opacity="1" 
+                                                                  BlurRadius="10"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+
+
+                    <Button Content="GitHub"
+                            Foreground="White"
+                            FontSize="15"
+                            FontWeight="Medium"
+                            Margin="5 ,5, 5, 5">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#010409"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#0D1117"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="100" Height="30"
+                                        CornerRadius="12"
+                                        Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                    <Grid Grid.Column="6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Ellipse Fill="Red" 
+                                 Grid.Column="1" 
+                                 Height="20" 
+                                 Width="20" 
+                                 HorizontalAlignment="Right"
+                                 Margin="0, 0, 20, 0"
+                                 MouseDown="Ellipse_MouseDown"/>
+
+                    </Grid>
+
+                </Grid>
+            </Grid>
+
+            <StackPanel Grid.Row="1"
+                    VerticalAlignment="Center"
+                    Margin="60">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Chiclana Records"
+                           Foreground="White"
+                           FontSize="50"
+                           VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+
+        </Grid>
+    </Border>
 </Window>
