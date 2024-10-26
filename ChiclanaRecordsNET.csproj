@@ -12,6 +12,11 @@
     <None Remove="Images\bg3.jpg" />
     <None Remove="Images\github.png" />
     <None Remove="Images\githubwhite.png" />
+    <None Remove="Images\logoupscaled.png" />
+    <None Remove="Images\logoupscaledcut.png" />
+    <None Remove="Images\unnamed.png" />
+    <None Remove="Images\upscaled.png" />
+    <None Remove="MVVM\Model\api.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,13 +27,17 @@
     <Resource Include="Images\githubwhite.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\logoupscaled.png" />
+    <Resource Include="Images\logoupscaledcut.png" />
+    <Resource Include="Images\unnamed.png" />
+    <Resource Include="Images\upscaled.png" />
+    <Content Include="MVVM\Model\api.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="MVVM\Model\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="Caliburn.Micro.Core" Version="4.0.212" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
   </ItemGroup>
 

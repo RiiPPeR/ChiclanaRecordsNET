@@ -5,11 +5,26 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ChiclanaRecordsNET.MVVM.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
-             Background="#252525">
+             d:DesignHeight="750" d:DesignWidth="1080">
     <Grid>
-        <TextBlock Text="Home"
-                   Foreground="White"
-                   FontSize="100"/>
+        <StackPanel>
+            <Image Source="./../../Images/upscaled.png"
+                   Width="100"
+                   HorizontalAlignment="Left"/>
+
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Chiclana Records"
+                           Foreground="White"
+                           FontSize="50"
+                           VerticalAlignment="Center"/>
+
+            </StackPanel>
+
+            <TextBlock Text="Vinyl record collection"
+                           Foreground="White"
+                           FontSize="30"
+                           VerticalAlignment="Center"/>
+        </StackPanel>
     </Grid>
 </UserControl>

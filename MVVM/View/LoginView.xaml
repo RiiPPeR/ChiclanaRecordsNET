@@ -5,10 +5,26 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ChiclanaRecordsNET.MVVM.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="750" d:DesignWidth="1080"
+             FontFamily="./../../Font/Poppins/#Poppins">
     <Grid>
-        <TextBlock Text="AQUI VA EL LOGIN"
-                   Foreground="White"
-                   FontSize="50"/>
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Width="500">
+            <TextBlock Text="Inicia sesión"
+                       Foreground="White"
+                       FontSize="50"/>
+
+            <Border CornerRadius="10">
+                <TextBox Height="35" Width="300"
+                     HorizontalAlignment="Left"
+                     Text="Hola que"
+                     FontSize="20"
+                     VerticalContentAlignment="Center"
+                     Background="Transparent">
+
+                </TextBox>
+            </Border>
+        </StackPanel>
     </Grid>
 </UserControl>

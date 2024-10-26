@@ -8,7 +8,7 @@
         Title="MainWindow" Height="800" Width="1280"
         WindowStyle="None"
         ResizeMode="NoResize"
-        FontFamily="./Font/Poppins/#Poppins"
+        FontFamily="./../../Font/Poppins/#Poppins"
         Background="Transparent"
         AllowsTransparency="True"
         >
@@ -26,7 +26,7 @@
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="200"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             
@@ -51,6 +51,8 @@
                         <ColumnDefinition />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
+
+                    
 
                     <TextBlock Text="Chiclana Records"
                                Foreground="White"
@@ -249,19 +251,9 @@
             </Grid>
 
             <StackPanel Grid.Row="1"
-                    VerticalAlignment="Center"
-                    Margin="60">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Chiclana Records"
-                           Foreground="White"
-                           FontSize="50"
-                           VerticalAlignment="Center"/>
+                    VerticalAlignment="Top"
+                    Margin="10">
 
-                </StackPanel>
-                <TextBlock Text="Vinyl record collection"
-                           Foreground="White"
-                           FontSize="30"
-                           VerticalAlignment="Center"/>
 
                 <Button Content="Home"
                         Height="25"
@@ -274,6 +266,10 @@
                 <Button Content="Login"
                         Height="25"
                         Command="{Binding NavigateToLoginCommand}"/>
+
+                <Button Content="Search"
+                        Height="25"
+                        Command="{Binding NavigateToSearchList}"/>
             </StackPanel>
 
             <ContentControl Grid.Row="1"

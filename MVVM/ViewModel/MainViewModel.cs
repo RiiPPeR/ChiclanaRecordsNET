@@ -27,14 +27,18 @@ namespace ChiclanaRecordsNET.MVVM.ViewModel
         public RelayCommand NavigateToHomeCommand { get; set; }
         public RelayCommand NavigateToSettingsViewCommand { get; set; }
         public RelayCommand NavigateToLoginCommand { get; set; }
+        public RelayCommand NavigateToSearchList { get; private set; }
+        public RelayCommand CloseCommand { get; private set; }
 
         public MainViewModel(INavigationService navService)
         {
             Navigation = navService;
+            Navigation.NavigateTo<HomeViewModel>();
             NavigateToHomeCommand = new RelayCommand(o => { Navigation.NavigateTo<HomeViewModel>(); }, o => true);
             NavigateToSettingsViewCommand = new RelayCommand(o => { Navigation.NavigateTo<SettingsViewModel>(); }, o => true);
-            NavigateToLoginCommand = new RelayCommand(O => { Navigation.NavigateTo<LoginViewModel>(); }, o => true);
+            NavigateToLoginCommand = new RelayCommand(o => { Navigation.NavigateTo<LoginViewModel>(); }, o => true);
+            NavigateToSearchList = new RelayCommand(o => { Navigation.NavigateTo<SearchListModel>(); }, o => true);
+            //CloseCommand = new RelayCommand(o => { ; }, o => true);
         }
     }
 }
-
