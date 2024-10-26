@@ -9,6 +9,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Font\Poppins\Poppins-Black.ttf" />
+    <None Remove="Font\Poppins\Poppins-BlackItalic.ttf" />
+    <None Remove="Font\Poppins\Poppins-Bold.ttf" />
+    <None Remove="Font\Poppins\Poppins-BoldItalic.ttf" />
+    <None Remove="Font\Poppins\Poppins-ExtraBold.ttf" />
+    <None Remove="Font\Poppins\Poppins-ExtraBoldItalic.ttf" />
+    <None Remove="Font\Poppins\Poppins-ExtraLight.ttf" />
+    <None Remove="Font\Poppins\Poppins-ExtraLightItalic.ttf" />
+    <None Remove="Font\Poppins\Poppins-Italic.ttf" />
+    <None Remove="Font\Poppins\Poppins-Light.ttf" />
+    <None Remove="Font\Poppins\Poppins-LightItalic.ttf" />
+    <None Remove="Font\Poppins\Poppins-Medium.ttf" />
+    <None Remove="Font\Poppins\Poppins-MediumItalic.ttf" />
+    <None Remove="Font\Poppins\Poppins-Regular.ttf" />
+    <None Remove="Font\Poppins\Poppins-SemiBold.ttf" />
+    <None Remove="Font\Poppins\Poppins-SemiBoldItalic.ttf" />
+    <None Remove="Font\Poppins\Poppins-Thin.ttf" />
+    <None Remove="Font\Poppins\Poppins-ThinItalic.ttf" />
     <None Remove="Images\bg3.jpg" />
     <None Remove="Images\github.png" />
     <None Remove="Images\githubwhite.png" />
@@ -31,6 +49,60 @@
     <Resource Include="Images\logoupscaledcut.png" />
     <Resource Include="Images\unnamed.png" />
     <Resource Include="Images\upscaled.png" />
+    <Content Include="Font\Poppins\Poppins-Black.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Font\Poppins\Poppins-BlackItalic.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Font\Poppins\Poppins-Bold.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Font\Poppins\Poppins-BoldItalic.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Font\Poppins\Poppins-ExtraBold.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Font\Poppins\Poppins-ExtraBoldItalic.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Font\Poppins\Poppins-ExtraLight.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Font\Poppins\Poppins-ExtraLightItalic.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Font\Poppins\Poppins-Italic.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Font\Poppins\Poppins-Light.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Font\Poppins\Poppins-LightItalic.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Font\Poppins\Poppins-Medium.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Font\Poppins\Poppins-MediumItalic.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Font\Poppins\Poppins-Regular.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Font\Poppins\Poppins-SemiBold.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Font\Poppins\Poppins-SemiBoldItalic.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Font\Poppins\Poppins-Thin.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Font\Poppins\Poppins-ThinItalic.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="MVVM\Model\api.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

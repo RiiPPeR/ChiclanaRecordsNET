@@ -5,14 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ChiclanaRecordsNET.MVVM.View"
              mc:Ignorable="d" 
-             d:DesignHeight="750" d:DesignWidth="1080"
+             d:DesignHeight="750" d:DesignWidth="1130"
              FontFamily="./../../Font/Poppins/#Poppins">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
@@ -22,19 +19,83 @@
 
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Row="0" Orientation="Vertical" Width="200">
+        <StackPanel Grid.Row="0" 
+                    Orientation="Vertical" 
+                    Width="200"
+                    HorizontalAlignment="Left">
             <TextBox x:Name="ArtistTextBox" 
                      Width="300" Margin="5"
                      Text="{Binding Artist}"/>
             <TextBox x:Name="TitleTextBox" 
                      Width="300" Margin="5"
                      Text="{Binding Title}"/>
-            <Button Content="Search" 
+            <Button Content="Buscar" 
                     Command="{Binding SearchCommand}" 
-                    Margin="5" />
+                    Margin="5" 
+                    Foreground="White"
+                    FontSize="25">
+
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#99081f45"/>
+                        <Setter Property="Cursor" Value="Hand"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#99010409"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="150" Height="40"
+                                        CornerRadius="13"
+                                        Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
         </StackPanel>
 
         <ScrollViewer  Grid.Row="1" VerticalScrollBarVisibility="Auto">
+
+            <ScrollViewer.Resources>
+                <Style x:Key="ScrollBarThumb" TargetType="{x:Type Thumb}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Thumb}">
+                                <Border CornerRadius="5" 
+                                Background="#CC081f45"/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+
+                <Style TargetType="{x:Type ScrollBar}">
+                    <Setter Property="Width" Value="8"/>
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ScrollBar}">
+                                <Grid>
+                                    <Border Background="Transparent"/>
+                                    <Track x:Name="PART_Track"
+                                           IsDirectionReversed="True">
+                                        <Track.Thumb>
+                                            <Thumb Style="{StaticResource ScrollBarThumb}"/>
+                                        </Track.Thumb>
+                                    </Track>
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ScrollViewer.Resources>
+
+
             <ItemsControl ItemsSource="{Binding Responses}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -44,7 +105,7 @@
 
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Grid Margin="5, 5, 5, 5">
+                        <!--<Grid Margin="5, 5, 5, 5">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="50"/>
                                 <ColumnDefinition Width="250"/>
@@ -56,14 +117,79 @@
 
                             <StackPanel Grid.Column="1" Width="auto">
                                 <TextBlock Text="{Binding Title}" 
-                                   Foreground="White"
-                                   Grid.Column="0"/>
+                                   Foreground="White"/>
                                 <TextBlock Text="{Binding Country}"
-                                   Foreground="White"
-                                   Grid.Column="1"/>
-
+                                   Foreground="White"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding LabelFirst}"
+                                               Foreground="White"/>
+                                    <TextBlock Text=" - "
+                                               Foreground="White"/>
+                                    <TextBlock Text="{Binding Catno}"
+                                               Foreground="White"/>
+                                </StackPanel>
                             </StackPanel>
-                        </Grid>
+                        </Grid>-->
+
+                        <Button Foreground="White"
+                                FontSize="15"
+                                FontWeight="Medium"
+                                Margin="5 ,5, 5, 5"
+                                Command="{Binding DataContext.RecordClicked, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                CommandParameter="{Binding}">
+                            <Grid>
+                                <Grid Margin="10, 5, 5, 5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image Source="{Binding Thumb}" 
+                                        Width="50" Height="50"
+                                        Grid.Column="0"/>
+
+                                    <StackPanel Grid.Column="1"
+                                                Margin="10"
+                                                Height="auto">
+                                        <TextBlock Text="{Binding Title}" 
+                                                   Foreground="White"/>
+                                        <TextBlock Text="{Binding Country}"
+                                                   Foreground="White"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding LabelFirst}"
+                                                       Foreground="White"/>
+                                            <TextBlock Text=" - "
+                                                       Foreground="White"/>
+                                            <TextBlock Text="{Binding Catno}"
+                                                       Foreground="White"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="#99081f45"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#99010409"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Width="360" Height="100"
+                                        CornerRadius="13"
+                                        Background="{TemplateBinding Background}">
+                                        <ContentPresenter VerticalAlignment="Center"
+                                                          HorizontalAlignment="Left"/>
+                                        
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

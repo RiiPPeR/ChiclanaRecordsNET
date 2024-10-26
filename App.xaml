@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:viewModel="clr-namespace:ChiclanaRecordsNET.MVVM.ViewModel" 
              xmlns:view="clr-namespace:ChiclanaRecordsNET.MVVM.View">
+    
     <Application.Resources>
         <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
             <view:HomeView/>
@@ -15,6 +16,9 @@
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:SearchListModel}">
             <view:SearchListView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:RecordViewModel}">
+            <view:RecordView/>
         </DataTemplate>
     </Application.Resources>
 </Application>

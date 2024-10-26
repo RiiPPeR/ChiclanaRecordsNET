@@ -37,7 +37,7 @@ namespace ChiclanaRecordsNET.MVVM.Model
         {
             try
             {
-                var response = await _client.GetAsync($"database/search?format=vinyl&artist={artist}&title={title}&format=album");
+                var response = await _client.GetAsync($"database/search?format=vinyl&artist={artist}&title={title}");
                 response.EnsureSuccessStatusCode();
 
                 var content = await response.Content.ReadAsStringAsync();
@@ -95,6 +95,10 @@ public class SearchResult
     public string ResourceUrl { get; set; }
     public string Type { get; set; }
     public int Id { get; set; }
+    public string LabelFirst
+    {
+        get => Label.FirstOrDefault();
+    }
 }
 
 public class CommunityD

@@ -6,7 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
+using ChiclanaRecordsNET.Core;
 
 namespace ChiclanaRecordsNET.MVVM.ViewModel
 {
@@ -32,8 +34,23 @@ namespace ChiclanaRecordsNET.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
+
         public BindableCollection<SearchResult> Responses { get; set; }
         public ICommand SearchCommand { get; }
+        public ICommand RecordClicked { get; }
+
+        private INavigationService _navigation;
+
+        public INavigationService Navigation
+        {
+            get => _navigation;
+            set
+            {
+                _navigation = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         public SearchListModel()
         {
@@ -43,6 +60,8 @@ namespace ChiclanaRecordsNET.MVVM.ViewModel
                 System.Diagnostics.Debug.WriteLine($"Artista: '{Artist}' Titulo: '{Title}'");
                 InitializeAsync(Artist, Title);
             }, o => true);
+
+            RecordClicked = new RelayCommand( OnRecordButtonClicked, O => true);
         }
         public async Task InitializeAsync(string artist, string title)
         {
@@ -60,5 +79,16 @@ namespace ChiclanaRecordsNET.MVVM.ViewModel
                 System.Diagnostics.Debug.WriteLine("No results found.");
             }
         }
+
+        private void OnRecordButtonClicked(object parameter)
+        {
+            if (parameter is SearchResult selectedRecord)
+            {
+                System.Diagnostics.Debug.WriteLine($"Selected Record - Title: '{selectedRecord.Title}'");
+
+                //Navigation.NavigateTo<RecordViewModel>(selectedRecord);
+            }
+        }
+
     }
 }

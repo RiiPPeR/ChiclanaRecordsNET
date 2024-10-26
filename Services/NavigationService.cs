@@ -5,7 +5,7 @@ using ChiclanaRecordsNET.MVVM.ViewModel;
 public interface INavigationService
 {
     ViewModel CurrentView { get; }
-    void NavigateTo<TViewModel>() where TViewModel : ViewModel;
+    void NavigateTo<TViewModel>(object parameter = null) where TViewModel : ViewModel;
 }
 
 namespace ChiclanaRecordsNET.Services
@@ -30,10 +30,13 @@ namespace ChiclanaRecordsNET.Services
             _viewModelFactory = viewModelFactory;
         }
 
-        public void NavigateTo<TViewModel>() where TViewModel : ViewModel
+        public void NavigateTo<TViewModel>(object parameter = null) where TViewModel : ViewModel
         {
             var viewModel = _viewModelFactory.Invoke(typeof(TViewModel));
             CurrentView = viewModel;
+
+            viewModel.Initialize(parameter);
+
             System.Diagnostics.Debug.WriteLine($"ViewModel cambiado a {viewModel}");
         }
 
