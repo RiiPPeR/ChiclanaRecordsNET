@@ -5,9 +5,32 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ChiclanaRecordsNET.MVVM.View"
              mc:Ignorable="d" 
-             d:DesignHeight="750" d:DesignWidth="1130"
-             FontFamily="./../../Font/Poppins/#Poppins">
-    <Grid>
-            
-    </Grid>
+             Height="800" Width="1280">
+    <StackPanel Orientation="Vertical">
+       
+        <TextBlock Text="{Binding Release.title, FallbackValue='Loading...'}"
+                   FontSize="50"
+                   Foreground="White"/>
+        <TextBlock Text="{Binding Release.country, FallbackValue='Loading...'}"
+                   Foreground="White"
+                   FontSize="50"/>
+        <TextBlock Text="{Binding Release.id, FallbackValue='Loading...'}"
+                   Foreground="White"
+                   FontSize="50"/>
+        
+        <ItemsControl ItemsSource="{Binding Release.images}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="5"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Image Source="{Binding resource_url}" 
+                           Width="200" Height="200"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </StackPanel>
 </UserControl>

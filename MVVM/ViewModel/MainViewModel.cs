@@ -33,11 +33,11 @@ namespace ChiclanaRecordsNET.MVVM.ViewModel
         public MainViewModel(INavigationService navService)
         {
             Navigation = navService;
-            Navigation.NavigateTo<HomeViewModel>();
+            Navigation.NavigateTo<LoginViewModel>();
             NavigateToHomeCommand = new RelayCommand(o => { Navigation.NavigateTo<HomeViewModel>(); }, o => true);
             NavigateToSettingsViewCommand = new RelayCommand(o => { Navigation.NavigateTo<SettingsViewModel>(); }, o => true);
             NavigateToLoginCommand = new RelayCommand(o => { Navigation.NavigateTo<LoginViewModel>(); }, o => true);
-            NavigateToSearchList = new RelayCommand(o => { Navigation.NavigateTo<SearchListModel>(); }, o => true);
+            NavigateToSearchList = new RelayCommand(o => { Navigation.NavigateTo<SearchListViewModel>(); }, o => true);
             //CloseCommand = new RelayCommand(o => { ; }, o => true);
         }
     }

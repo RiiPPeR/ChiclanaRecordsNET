@@ -24,5 +24,10 @@ namespace ChiclanaRecordsNET.MVVM.View
         {
             InitializeComponent();
         }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

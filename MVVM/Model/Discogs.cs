@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Text.Json;
 using System.Collections.Generic;
 using static System.Net.Mime.MediaTypeNames;
+using System.IO;
 
 namespace ChiclanaRecordsNET.MVVM.Model
 {
@@ -18,10 +19,20 @@ namespace ChiclanaRecordsNET.MVVM.Model
                 BaseAddress = new Uri("https://api.discogs.com/")
             };
 
+            string currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            string apiFilePath = Path.Combine(currentDirectory, "MVVM", "Model", "api.txt");
+
+            System.Diagnostics.Debug.WriteLine($"Path: {apiFilePath}");
+
+            var userToken = File.ReadAllText(apiFilePath).Trim();
+
+            System.Diagnostics.Debug.WriteLine($"Api key: {userToken}");
+
             _client.DefaultRequestHeaders.Add("User-Agent", "MyDiscogsApp/1.0");
+            _client.DefaultRequestHeaders.Add("Authorization", $"Discogs token={userToken}");
         }
 
-        public async Task<Release> GetReleaseAsync(int releaseId)
+        public async Task<Album> GetReleaseAsync(int releaseId)
         {
             try
             {
@@ -29,7 +40,7 @@ namespace ChiclanaRecordsNET.MVVM.Model
                 response.EnsureSuccessStatusCode();
 
                 var content = await response.Content.ReadAsStringAsync();
-                var release = JsonSerializer.Deserialize<Release>(content, new JsonSerializerOptions
+                var release = JsonSerializer.Deserialize<Album>(content, new JsonSerializerOptions
                 {
                     PropertyNameCaseInsensitive = true
                 });
@@ -43,92 +54,150 @@ namespace ChiclanaRecordsNET.MVVM.Model
         }
     }
 
-    public class Release
-    {
-        public string Title { get; set; }
-        public int Id { get; set; }
-        public List<Artist> Artists { get; set; }
-        public string DataQuality { get; set; }
-        public string Country { get; set; }
-        public int Year { get; set; }
-        public List<Format> Formats { get; set; }
-        public List<string> Genres { get; set; }
-        public List<string> Styles { get; set; }
-        public List<Label> Labels { get; set; }
-        public List<Track> Tracklist { get; set; }
-        public string Uri { get; set; }
-        public List<Video> Videos { get; set; }
-        public decimal LowestPrice { get; set; }
-        public string Notes { get; set; }
-        public int NumForSale { get; set; }
-        public Community Community { get; set; }
-        public List<Image> Images { get; set; }  // Added Images
-        public string Thumb { get; set; }
-    }
-
-    public class Image
-    {
-        public string Type { get; set; }
-        public string Uri { get; set; }
-        public string ResourceUrl { get; set; }
-        public string Uri150 { get; set; }
-        public int Width { get; set; }
-        public int Height { get; set; }
-    }
-
     public class Artist
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string ResourceUrl { get; set; }
-        public string Role { get; set; }
-        public string Join { get; set; }
-        public string Anv { get; set; }
-        public string Tracks { get; set; }
-    }
-
-    public class Format
-    {
-        public string Name { get; set; }
-        public string Qty { get; set; }
-        public List<string> Descriptions { get; set; }
-    }
-
-    public class Track
-    {
-        public string Position { get; set; }
-        public string Title { get; set; }
-        public string Duration { get; set; }
-        public string Type { get; set; }
-    }
-
-    public class Label
-    {
-        public string Name { get; set; }
-        public string Catno { get; set; }
-        public int Id { get; set; }
-        public string ResourceUrl { get; set; }
-    }
-
-    public class Video
-    {
-        public string Uri { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public int Duration { get; set; }
-        public bool Embed { get; set; }
+        public string anv { get; set; }
+        public int? id { get; set; }
+        public string join { get; set; }
+        public string name { get; set; }
+        public string resource_url { get; set; }
+        public string role { get; set; }
+        public string tracks { get; set; }
     }
 
     public class Community
     {
-        public Rating Rating { get; set; }
-        public int Have { get; set; }
-        public int Want { get; set; }
+        public List<Contributor> contributors { get; set; }
+        public string data_quality { get; set; }
+        public int? have { get; set; }
+        public Rating rating { get; set; }
+        public string status { get; set; }
+        public Submitter submitter { get; set; }
+        public int? want { get; set; }
+    }
+
+    public class Company
+    {
+        public string catno { get; set; }
+        public string entity_type { get; set; }
+        public string entity_type_name { get; set; }
+        public int? id { get; set; }
+        public string name { get; set; }
+        public string resource_url { get; set; }
+    }
+
+    public class Contributor
+    {
+        public string resource_url { get; set; }
+        public string username { get; set; }
+    }
+
+    public class Extraartist
+    {
+        public string anv { get; set; }
+        public int? id { get; set; }
+        public string join { get; set; }
+        public string name { get; set; }
+        public string resource_url { get; set; }
+        public string role { get; set; }
+        public string tracks { get; set; }
+    }
+
+    public class Format
+    {
+        public List<string> descriptions { get; set; }
+        public string name { get; set; }
+        public string qty { get; set; }
+    }
+
+    public class Identifier
+    {
+        public string type { get; set; }
+        public string value { get; set; }
+    }
+
+    public class Image
+    {
+        public int? height { get; set; }
+        public string resource_url { get; set; }
+        public string type { get; set; }
+        public string uri { get; set; }
+        public string uri150 { get; set; }
+        public int? width { get; set; }
+    }
+
+    public class Label
+    {
+        public string catno { get; set; }
+        public string entity_type { get; set; }
+        public int? id { get; set; }
+        public string name { get; set; }
+        public string resource_url { get; set; }
     }
 
     public class Rating
     {
-        public decimal Average { get; set; }
-        public int Count { get; set; }
+        public double? average { get; set; }
+        public int? count { get; set; }
+    }
+
+    public class Album
+    {
+        public string title { get; set; }
+        public int? id { get; set; }
+        public List<Artist> artists { get; set; }
+        public string data_quality { get; set; }
+        public string thumb { get; set; }
+        public Community community { get; set; }
+        public List<Company> companies { get; set; }
+        public string country { get; set; }
+        public DateTime? date_added { get; set; }
+        public DateTime? date_changed { get; set; }
+        public int? estimated_weight { get; set; }
+        public List<Extraartist> extraartists { get; set; }
+        public int? format_quantity { get; set; }
+        public List<Format> formats { get; set; }
+        public List<string> genres { get; set; }
+        public List<Identifier> identifiers { get; set; }
+        public List<Image> images { get; set; }
+        public List<Label> labels { get; set; }
+        public double? lowest_price { get; set; }
+        public int? master_id { get; set; }
+        public string master_url { get; set; }
+        public string notes { get; set; }
+        public int? num_for_sale { get; set; }
+        public string released { get; set; }
+        public string released_formatted { get; set; }
+        public string resource_url { get; set; }
+        public List<object> series { get; set; }
+        public string status { get; set; }
+        public List<string> styles { get; set; }
+        public List<Tracklist> tracklist { get; set; }
+        public string uri { get; set; }
+        public List<Video> videos { get; set; }
+        public int? year { get; set; }
+    }
+
+    public class Submitter
+    {
+        public string resource_url { get; set; }
+        public string username { get; set; }
+    }
+
+    public class Tracklist
+    {
+        public string duration { get; set; }
+        public string position { get; set; }
+        public string title { get; set; }
+        public string type_ { get; set; }
+    }
+
+    public class Video
+    {
+        public string description { get; set; }
+        public int? duration { get; set; }
+        public bool? embed { get; set; }
+        public string title { get; set; }
+        public string uri { get; set; }
     }
 }

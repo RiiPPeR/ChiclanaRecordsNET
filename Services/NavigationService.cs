@@ -35,7 +35,10 @@ namespace ChiclanaRecordsNET.Services
             var viewModel = _viewModelFactory.Invoke(typeof(TViewModel));
             CurrentView = viewModel;
 
-            viewModel.Initialize(parameter);
+            if(parameter != null)
+            {
+                viewModel.Initialize(parameter);
+            }
 
             System.Diagnostics.Debug.WriteLine($"ViewModel cambiado a {viewModel}");
         }

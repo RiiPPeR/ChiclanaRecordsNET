@@ -1,24 +1,32 @@
 ﻿<Application x:Class="ChiclanaRecordsNET.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:ChiclanaRecordsNET"
              xmlns:viewModel="clr-namespace:ChiclanaRecordsNET.MVVM.ViewModel" 
              xmlns:view="clr-namespace:ChiclanaRecordsNET.MVVM.View">
-    
+
     <Application.Resources>
-        <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
-            <view:HomeView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModel:SettingsViewModel}">
-            <view:SettingsView/>
-        </DataTemplate>        
-        <DataTemplate DataType="{x:Type viewModel:LoginViewModel}">
-            <view:LoginView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModel:SearchListModel}">
-            <view:SearchListView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModel:RecordViewModel}">
-            <view:RecordView/>
-        </DataTemplate>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="./Styles/UIColors.xaml"/>
+                <ResourceDictionary Source="./Styles/ButtonStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
+                <view:HomeView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:SettingsViewModel}">
+                <view:SettingsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:LoginViewModel}">
+                <view:LoginView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:SearchListViewModel}">
+                <view:SearchListView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:RecordViewModel}">
+                <view:RecordView/>
+            </DataTemplate>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

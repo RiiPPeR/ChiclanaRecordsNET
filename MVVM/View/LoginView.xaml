@@ -4,27 +4,140 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ChiclanaRecordsNET.MVVM.View"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
-             d:DesignHeight="750" d:DesignWidth="1080"
-             FontFamily="./../../Font/Poppins/#Poppins">
-    <Grid>
-        <StackPanel HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Width="500">
-            <TextBlock Text="Inicia sesión"
-                       Foreground="White"
-                       FontSize="50"/>
+             Height="850" Width="1130">
+    <Grid Background="#660B0500">
+        <Border CornerRadius="10" 
+                Width="420"
+                Height="500"
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Center"
+                BorderThickness="4">
 
-            <Border CornerRadius="10">
-                <TextBox Height="35" Width="300"
-                     HorizontalAlignment="Left"
-                     Text="Hola que"
-                     FontSize="20"
-                     VerticalContentAlignment="Center"
-                     Background="Transparent">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="{StaticResource winBorderColor3}" Offset="0"/>
+                    <GradientStop Color="{StaticResource winBorderColor2}" Offset="0.5"/>
+                    <GradientStop Color="{StaticResource winBorderColor1}" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
 
+            <Border.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="{StaticResource secondaryBackColor1}" Offset="0"/>
+                    <GradientStop Color="{StaticResource secondaryBackColor2}" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+
+            <StackPanel Orientation="Vertical"
+                        Margin="0,35,0,0"
+                        Width="320" Height="450"
+                        VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Image Source="./../../Images/logoupscaledcut.png"
+                           Width="100" Height="100"
+                           Margin="0,0,0,10"/>
+                <TextBlock Text="Chiclana Records"
+                               Foreground="White"
+                               FontSize="25"
+                               FontWeight="Medium"
+                               FontFamily="Montserrat"
+                               HorizontalAlignment="Center"/>
+                <TextBlock Text="Tu colección de discos en un solo lugar."
+                               Foreground="LightGray"
+                               FontSize="12"
+                               FontWeight="Medium"
+                               FontFamily="Montserrat"
+                               TextWrapping="Wrap"
+                               TextAlignment="Center"
+                               Margin="0,5,0,0"/>
+                <TextBlock Text="Nombre de usuario"
+                               Foreground="DarkGray"
+                               FontSize="12"
+                               FontWeight="Medium"
+                               FontFamily="Montserrat"                             
+                               Margin="0,35,0,0"/>
+                <TextBox x:Name="txtUser"
+                             FontSize="13"
+                             FontWeight="Medium"
+                             FontFamily="Montserrat"                            
+                             Foreground="White"
+                             CaretBrush="LightGray"
+                             BorderBrush="DarkGray"
+                             BorderThickness="0,0,0,2"
+                             Height="28"
+                             VerticalContentAlignment="Center"
+                             Margin="0,5,0,0"
+                             Padding="20,0,0,0"
+                             Background="Transparent">
                 </TextBox>
-            </Border>
-        </StackPanel>
+                <TextBlock Text="Contraseña"
+                               Foreground="DarkGray"
+                               FontSize="12"
+                               FontWeight="Medium"
+                               FontFamily="Montserrat"                             
+                               Margin="0,15,0,0"/>
+                <PasswordBox x:Name="txtPass"
+                             FontSize="13"
+                             FontWeight="Medium"
+                             FontFamily="Montserrat"                            
+                             Foreground="White"
+                             CaretBrush="LightGray"
+                             BorderBrush="DarkGray"
+                             BorderThickness="0,0,0,2"
+                             Height="28"
+                             VerticalContentAlignment="Center"
+                             Margin="0,5,0,0"
+                             Padding="20,0,0,0"
+                             Background="Transparent">
+                </PasswordBox>
+                <Button x:Name="btnLogin"                          
+                            BorderThickness="0"
+                            Content="LOG IN"
+                            Foreground="White"
+                            FontSize="12"
+                            FontFamily="Montserrat"
+                            Cursor="Hand"                           
+                            Margin="0,50,0,0"
+                            Click="btnLogin_Click">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#462AD8"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#28AEED"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="150" Height="40"
+                                        CornerRadius="20"
+                                        Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Margin="0,15,0,0">
+                    <TextBlock Text="¿Contraseña olvidada?"
+                               Foreground="DarkGray"
+                               FontSize="12"
+                               FontWeight="Medium"
+                               FontFamily="Montserrat"/>
+                    <TextBlock Text="Cambiar"
+                               Foreground="White"
+                               FontSize="12"
+                               FontWeight="Medium"
+                               FontFamily="Montserrat"
+                               Cursor="Hand"
+                               Margin="8,0,0,0"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
     </Grid>
 </UserControl>

@@ -28,6 +28,8 @@
     <None Remove="Font\Poppins\Poppins-Thin.ttf" />
     <None Remove="Font\Poppins\Poppins-ThinItalic.ttf" />
     <None Remove="Images\bg3.jpg" />
+    <None Remove="Images\bg3ruido.png" />
+    <None Remove="Images\favicon.ico" />
     <None Remove="Images\github.png" />
     <None Remove="Images\githubwhite.png" />
     <None Remove="Images\logoupscaled.png" />
@@ -41,6 +43,8 @@
     <Resource Include="Images\bg3.jpg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\bg3ruido.png" />
+    <Resource Include="Images\favicon.ico" />
     <Resource Include="Images\github.png" />
     <Resource Include="Images\githubwhite.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
@@ -109,7 +113,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Caliburn.Micro" Version="4.0.212" />
     <PackageReference Include="Caliburn.Micro.Core" Version="4.0.212" />
+    <PackageReference Include="FontAwesome.Sharp" Version="6.6.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
   </ItemGroup>
 

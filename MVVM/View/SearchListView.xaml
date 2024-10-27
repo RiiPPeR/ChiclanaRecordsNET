@@ -5,10 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ChiclanaRecordsNET.MVVM.View"
              mc:Ignorable="d" 
-             d:DesignHeight="750" d:DesignWidth="1130"
+             d:DesignHeight="850" d:DesignWidth="1130"
              FontFamily="./../../Font/Poppins/#Poppins">
 
-    <Grid>
+    <Grid Background="#660B0500">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
@@ -99,7 +99,8 @@
             <ItemsControl ItemsSource="{Binding Responses}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <UniformGrid Columns="3"/>
+                        <UniformGrid Columns="3"
+                                     VerticalAlignment="Top"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
 

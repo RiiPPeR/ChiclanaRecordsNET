@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Net.Http;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace ChiclanaRecordsNET.MVVM.Model
 {
@@ -37,7 +32,7 @@ namespace ChiclanaRecordsNET.MVVM.Model
         {
             try
             {
-                var response = await _client.GetAsync($"database/search?format=vinyl&artist={artist}&title={title}");
+                var response = await _client.GetAsync($"database/search?format=vinyl&artist={artist}&title={title}&type=release&country=spain");
                 response.EnsureSuccessStatusCode();
 
                 var content = await response.Content.ReadAsStringAsync();

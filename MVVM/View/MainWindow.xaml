@@ -3,281 +3,306 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ChiclanaRecordsNET"
+        xmlns:local="clr-namespace:ChiclanaRecordsNET.MVVM.View" xmlns:local1="clr-namespace:ChiclanaRecordsNET.MVVM.View"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1280"
+        Title="Chiclana Records" Height="900" Width="1380"
         WindowStyle="None"
         ResizeMode="NoResize"
         FontFamily="./../../Font/Poppins/#Poppins"
         Background="Transparent"
         AllowsTransparency="True"
+        TextOptions.TextFormattingMode="Ideal"
+        RenderOptions.BitmapScalingMode="HighQuality"
+        Icon="./../../Images/favicon.ico"
+        WindowStartupLocation="CenterScreen"
         >
 
 
-    <Border CornerRadius="10">
+    <Border CornerRadius="12">
         <Border.Background>
             <ImageBrush ImageSource="./../../Images/bg3.jpg"/>
         </Border.Background>
-        <Grid>
-            
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
+        <Border CornerRadius="10"
+            BorderThickness="4">
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            
-            <Grid Grid.ColumnSpan="2"
-                  MouseDown="Grid_MouseDown">
-                <Rectangle RadiusX="10" RadiusY="10">
-                    <Rectangle.Fill>
-                        <SolidColorBrush Color="Black" Opacity="0.4"/>
-                    </Rectangle.Fill>
-                    <Rectangle.Effect>
-                        <BlurEffect Radius="2"/>
-                    </Rectangle.Effect>
-                </Rectangle>
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="{StaticResource winBorderColor2}" Offset="0"/>
+                    <GradientStop Color="{StaticResource winBorderColor3}" Offset="0.5"/>
+                    <GradientStop Color="{StaticResource winBorderColor1}" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
+            <Grid>
 
-                    
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
 
-                    <TextBlock Text="Chiclana Records"
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.ColumnSpan="2"
+                        CornerRadius="10, 10, 0, 0"
+                        MouseDown="Grid_MouseDown">
+
+                    <Border.Background>
+                        <LinearGradientBrush>
+                            <GradientStop Color="{StaticResource secondaryBackColor1}" Offset="0"/>
+                            <GradientStop Color="{StaticResource secondaryBackColor2}" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+
+                    <Grid MouseDown="Grid_MouseDown">
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+
+
+                            <TextBlock Text="Chiclana Records"
                                Foreground="White"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Center"
                                Grid.Column="1"
                                FontSize="20"
                                MouseDown="TextBlock_MouseDown">
-                        <TextBlock.Style>
-                            <Style TargetType="TextBlock">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver"
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver"
                                              Value="True">
-                                        <Setter Property="Effect">
-                                            <Setter.Value>
-                                                <DropShadowEffect ShadowDepth="1" 
+                                                <Setter Property="Effect">
+                                                    <Setter.Value>
+                                                        <DropShadowEffect ShadowDepth="1" 
                                                                   Color="White" 
                                                                   Opacity="1" 
                                                                   BlurRadius="10"/>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
 
-                    <TextBlock Text="Mi Colección"
+                            <TextBlock Text="Mi Colección"
                                Foreground="White"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Center"
                                Grid.Column="2"
                                FontSize="20"
                                MouseDown="TextBlock_MouseDown">
-                        <TextBlock.Style>
-                            <Style TargetType="TextBlock">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver"
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver"
                                              Value="True">
-                                        <Setter Property="Effect">
-                                            <Setter.Value>
-                                                <DropShadowEffect ShadowDepth="1" 
+                                                <Setter Property="Effect">
+                                                    <Setter.Value>
+                                                        <DropShadowEffect ShadowDepth="1" 
                                                                   Color="White" 
                                                                   Opacity="1" 
                                                                   BlurRadius="10"/>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
 
-                    <TextBlock Text="Colecciones"
+                            <TextBlock Text="Colecciones"
                                Foreground="White"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Center"
                                Grid.Column="3"
                                FontSize="20"
                                MouseDown="TextBlock_MouseDown">
-                        <TextBlock.Style>
-                            <Style TargetType="TextBlock">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver"
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver"
                                              Value="True">
-                                        <Setter Property="Effect">
-                                            <Setter.Value>
-                                                <DropShadowEffect ShadowDepth="1" 
+                                                <Setter Property="Effect">
+                                                    <Setter.Value>
+                                                        <DropShadowEffect ShadowDepth="1" 
                                                                   Color="White" 
                                                                   Opacity="1" 
                                                                   BlurRadius="10"/>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
 
 
-                    <Button Foreground="White"
+                            <Button Foreground="White"
                             FontSize="15"
                             FontWeight="Medium"
-                            Margin="5 ,5, 5, 5"
+                            Margin="10,5,0,5"
                             Click="ButtonGitHub_Click">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="30"/>
-                                <ColumnDefinition Width="60"/>
-                            </Grid.ColumnDefinitions>
-                            <Image Height="25" Width="25"
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="30"/>
+                                        <ColumnDefinition Width="60"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Height="25" Width="25"
                                    Source="./../../Images/githubwhite.png"
-                                   Grid.Column="0"/>
-                            <TextBlock Text="GitHub"
-                                       Grid.Column="1" Margin="0,6,0,-6"/>
+                                   Grid.Column="0"
+                                   RenderOptions.BitmapScalingMode="HighQuality"/>
+                                    <TextBlock Text="GitHub"
+                                       Grid.Column="1" Margin="0,2,0,-2"/>
+                                </Grid>
+
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Background" Value="#081f45"/>
+                                        <Setter Property="Cursor" Value="Hand"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#010409"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Width="120" Height="35"
+                                        CornerRadius="13"
+                                        Background="{TemplateBinding Background}">
+                                            <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+
+
+                            <StackPanel x:Name="pnlControlBar"
+                                Grid.Column="6"
+                                Orientation="Horizontal"
+                                FlowDirection="RightToLeft"
+                                Background="Transparent"
+                                Margin="0,0,5,0"
+                                MouseEnter="pnlControlBar_MouseEnter">
+                                <Button x:Name="btnClose"
+                                Style="{StaticResource controlButton}"
+                                Tag="{StaticResource color4}"
+                                Click="btnClose_Click">
+                                    <fa:IconImage Icon="Xmark" Style="{StaticResource controlButtonIcon}"/>
+                                </Button>
+                                <Button x:Name="btnMinimize"
+                                Style="{StaticResource controlButton}"
+                                Tag="{StaticResource color8}"
+                                Click="btnMinimize_Click">
+                                    <fa:IconImage Icon="WindowMinimize" Width="12" Style="{StaticResource controlButtonIcon}"/>
+                                </Button>
+                            </StackPanel>
                         </Grid>
-
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="#081f45"/>
-                                <Setter Property="Cursor" Value="Hand"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#010409"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Border Width="120" Height="35"
-                                        CornerRadius="13"
-                                        Background="{TemplateBinding Background}">
-                                    <ContentPresenter VerticalAlignment="Center"
-                                                      HorizontalAlignment="Center"/>
-
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
-
-                    <Grid Grid.Column="6">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-
-
-                        <Button Content="-"
-                            Foreground="White"
-                            FontSize="15"
-                            FontWeight="Medium"
-                            Margin="5 ,5, 5, 5"
-                            Grid.Column="2"
-                            Click="Button_Click_Minimize">
-                            <Button.Style>
-                                <Style TargetType="Button">
-                                    <Setter Property="Background" Value="Orange"/>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="OrangeRed"/>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                            <Button.Template>
-                                <ControlTemplate TargetType="Button">
-                                    <Border Width="30" Height="30"
-                                        CornerRadius="13"
-                                        Background="{TemplateBinding Background}">
-                                        <ContentPresenter VerticalAlignment="Center"
-                                                      HorizontalAlignment="Center"/>
-
-                                    </Border>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
-
-
-
-                        <Button Content="X"
-                            Foreground="White"
-                            FontSize="15"
-                            FontWeight="Medium"
-                            Margin="5 ,5, 5, 5"
-                            Grid.Column="3"
-                            Click="Button_Click_Close">
-                            <Button.Style>
-                                <Style TargetType="Button">
-                                    <Setter Property="Background" Value="Red"/>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="DarkRed"/>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                            <Button.Template>
-                                <ControlTemplate TargetType="Button">
-                                    <Border Width="30" Height="30"
-                                        CornerRadius="13"
-                                        Background="{TemplateBinding Background}">
-                                        <ContentPresenter VerticalAlignment="Center"
-                                                      HorizontalAlignment="Center"/>
-
-                                    </Border>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
-
-
                     </Grid>
-                </Grid>
-            </Grid>
+                </Border>
 
-            <StackPanel Grid.Row="1"
-                    VerticalAlignment="Top"
-                    Margin="10">
+                <Border Grid.Row="1"
+                        CornerRadius="0, 0, 0, 10">
+                    <Border.Background>
+                        <LinearGradientBrush>
+                            <GradientStop Color="{StaticResource secondaryBackColor1}" Offset="0"/>
+                            <GradientStop Color="{StaticResource secondaryBackColor2}" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Grid>
+                        <StackPanel Grid.Row="1"
+                                    VerticalAlignment="Top"
+                                    Margin="10">
 
+                            <RadioButton Command="{Binding NavigateToHomeCommand}"
+                                         Style="{StaticResource menuButton}"
+                                         Tag="{StaticResource color1}">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:IconImage Icon="Home" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Menú principal" Style="{StaticResource menuButtonText}"/>
+                                </StackPanel>
+                            </RadioButton>
 
-                <Button Content="Home"
-                        Height="25"
-                        Command="{Binding NavigateToHomeCommand}"/>
+                            <RadioButton Command="{Binding NavigateToSettingsViewCommand}"
+                                         Style="{StaticResource menuButton}"
+                                         Tag="{StaticResource color2}">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:IconImage Icon="Box" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Ajustes" Style="{StaticResource menuButtonText}"/>
+                                </StackPanel>
+                            </RadioButton>
 
-                <Button Content="Settings"
-                        Height="25"
-                        Command="{Binding NavigateToSettingsViewCommand}"/>
+                            <RadioButton Command="{Binding NavigateToLoginCommand}"
+                                         Style="{StaticResource menuButton}"
+                                         Tag="{StaticResource color3}">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:IconImage Icon="Person" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Log in" Style="{StaticResource menuButtonText}"/>
+                                </StackPanel>
+                            </RadioButton>
 
-                <Button Content="Login"
-                        Height="25"
-                        Command="{Binding NavigateToLoginCommand}"/>
+                            <RadioButton Command="{Binding NavigateToSearchList}"
+                                         Style="{StaticResource menuButton}"
+                                         Tag="{StaticResource color8}">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:IconImage Icon="RecordVinyl" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Buscar" Style="{StaticResource menuButtonText}"/>
+                                </StackPanel>
+                            </RadioButton>
+                        </StackPanel>
 
-                <Button Content="Search"
-                        Height="25"
-                        Command="{Binding NavigateToSearchList}"/>
-            </StackPanel>
+                        <StackPanel Grid.Row="1"
+                                    VerticalAlignment="Bottom"
+                                    Margin="10">
 
-            <ContentControl Grid.Row="1"
+                            <Image Source="./../../Images/logoupscaledcut.png"
+                                   Width="80"/>
+                            <TextBlock Text="Chiclana Records"
+                                       FontSize="26"
+                                       Foreground="{StaticResource color1}"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <ContentControl Grid.Row="1"
                             Grid.Column="1"
                             Content="{Binding Navigation.CurrentView}">
-                
-            </ContentControl>
 
-        </Grid>
+                </ContentControl>
+
+
+                <Grid x:Name="ModalOverlay"
+                  Background="Transparent"
+                  Visibility="Collapsed">
+                    <Grid HorizontalAlignment="Center"
+                      VerticalAlignment="Center">
+                        <local:RecordView x:Name="RecordView" />
+                        <Button Content="Close" 
+                            Command="{Binding CloseModalCommand}" 
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Margin="10"/>
+                    </Grid>
+                </Grid>
+
+            </Grid>
+        </Border>
     </Border>
 </Window>
