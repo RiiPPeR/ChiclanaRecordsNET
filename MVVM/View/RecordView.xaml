@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ChiclanaRecordsNET.MVVM.View"
              mc:Ignorable="d" 
-             Height="800" Width="1280">
+             Height="850" Width="1380"
+             Background="#660B0500">
     <StackPanel Orientation="Vertical">
        
         <TextBlock Text="{Binding Release.title, FallbackValue='Loading...'}"
@@ -17,18 +18,34 @@
         <TextBlock Text="{Binding Release.id, FallbackValue='Loading...'}"
                    Foreground="White"
                    FontSize="50"/>
-        
-        <ItemsControl ItemsSource="{Binding Release.images}">
+
+        <ItemsControl ItemsSource="{Binding Release.artists, FallbackValue='./../../Images/upscaled.png'}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid Columns="5"/>
+                    <UniformGrid/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
 
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Image Source="{Binding resource_url}" 
-                           Width="200" Height="200"/>
+                    <TextBlock Text="{Binding name, FallbackValue='Loading...'}"
+                               Foreground="White"
+                               FontSize="50"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <ItemsControl ItemsSource="{Binding Release.images, FallbackValue='./../../Images/upscaled.png'}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Image Source="{Binding resource_url, FallbackValue='./../../Images/upscaled.png'}" 
+                           Width="170" Height="170"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

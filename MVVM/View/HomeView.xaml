@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ChiclanaRecordsNET.MVVM.View"
              mc:Ignorable="d" 
-             d:DesignHeight="750" d:DesignWidth="1080">
-    <Grid>
+             Height="850" Width="1130">
+    <Grid Background="#660B0500">
         <StackPanel>
             <Image Source="./../../Images/upscaled.png"
                    Width="100"

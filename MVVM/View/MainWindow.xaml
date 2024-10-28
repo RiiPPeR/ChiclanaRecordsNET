@@ -266,6 +266,15 @@
                                     <TextBlock Text="Buscar" Style="{StaticResource menuButtonText}"/>
                                 </StackPanel>
                             </RadioButton>
+
+                            <RadioButton Command="{Binding NavigateToAcercaDe}"
+                                         Style="{StaticResource menuButton}"
+                                         Tag="{StaticResource color6}">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:IconImage Icon="QuestionCircle" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Acerca de nosotros" Style="{StaticResource menuButtonText}"/>
+                                </StackPanel>
+                            </RadioButton>
                         </StackPanel>
 
                         <StackPanel Grid.Row="1"

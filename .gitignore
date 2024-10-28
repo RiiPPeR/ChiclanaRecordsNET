@@ -362,6 +362,5 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
-# Ignore api.txt
-MVVM/Model/api.txt
-bin/Debug/net8.0-windows/MVVM/Model
+# Ignore app config
+App.config

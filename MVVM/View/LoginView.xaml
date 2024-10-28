@@ -4,13 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ChiclanaRecordsNET.MVVM.View"
-             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp" xmlns:customcontrol="clr-namespace:ChiclanaRecordsNET.MVVM.CustomControl"
              mc:Ignorable="d" 
              Height="850" Width="1130">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+    </UserControl.Resources>
+
+    <UserControl.Visibility>
+        <Binding Path="IsViewVisible" Mode="TwoWay" Converter="{StaticResource BooleanToVisibility}"/>
+    </UserControl.Visibility>
+    
     <Grid Background="#660B0500">
         <Border CornerRadius="10" 
                 Width="420"
-                Height="500"
+                Height="550"
                 VerticalAlignment="Center" 
                 HorizontalAlignment="Center"
                 BorderThickness="4">
@@ -31,8 +40,7 @@
             </Border.Background>
 
             <StackPanel Orientation="Vertical"
-                        Margin="0,35,0,0"
-                        Width="320" Height="450"
+                        Width="320" Height="500"
                         VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Image Source="./../../Images/logoupscaledcut.png"
                            Width="100" Height="100"
@@ -41,26 +49,23 @@
                                Foreground="White"
                                FontSize="25"
                                FontWeight="Medium"
-                               FontFamily="Montserrat"
                                HorizontalAlignment="Center"/>
                 <TextBlock Text="Tu colección de discos en un solo lugar."
                                Foreground="LightGray"
                                FontSize="12"
                                FontWeight="Medium"
-                               FontFamily="Montserrat"
                                TextWrapping="Wrap"
                                TextAlignment="Center"
                                Margin="0,5,0,0"/>
                 <TextBlock Text="Nombre de usuario"
                                Foreground="DarkGray"
                                FontSize="12"
-                               FontWeight="Medium"
-                               FontFamily="Montserrat"                             
+                               FontWeight="Medium"                         
                                Margin="0,35,0,0"/>
                 <TextBox x:Name="txtUser"
+                             Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
                              FontSize="13"
-                             FontWeight="Medium"
-                             FontFamily="Montserrat"                            
+                             FontWeight="Medium"                          
                              Foreground="White"
                              CaretBrush="LightGray"
                              BorderBrush="DarkGray"
@@ -74,10 +79,9 @@
                 <TextBlock Text="Contraseña"
                                Foreground="DarkGray"
                                FontSize="12"
-                               FontWeight="Medium"
-                               FontFamily="Montserrat"                             
+                               FontWeight="Medium"                           
                                Margin="0,15,0,0"/>
-                <PasswordBox x:Name="txtPass"
+                <!--<PasswordBox x:Name="txtPass"
                              FontSize="13"
                              FontWeight="Medium"
                              FontFamily="Montserrat"                            
@@ -90,19 +94,34 @@
                              Margin="0,5,0,0"
                              Padding="20,0,0,0"
                              Background="Transparent">
-                </PasswordBox>
-                <Button x:Name="btnLogin"                          
+                </PasswordBox>-->
+
+                <customcontrol:BindablePasswordBox
+                    Height="28"
+                    Margin="0, 5, 0, 0"
+                    Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    
+                </customcontrol:BindablePasswordBox>
+
+                <TextBlock Text="{Binding ErrorMessage}" 
+                           Foreground="{StaticResource color7}"
+                           FontSize="20"/>
+
+                <ProgressBar IsIndeterminate="True" 
+                        Width="20" Height="20" Margin="0,0,0,0"
+                        Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibility}}" />
+
+                <Button x:Name="btnLogin"
+                            Command="{Binding LoginCommand, UpdateSourceTrigger=PropertyChanged}"
                             BorderThickness="0"
-                            Content="LOG IN"
-                            Foreground="White"
+                            Content="INICIAR SESIÓN"
+                            Foreground="Black"
                             FontSize="12"
-                            FontFamily="Montserrat"
                             Cursor="Hand"                           
-                            Margin="0,50,0,0"
-                            Click="btnLogin_Click">
+                            Margin="0,20,0,0">
                     <Button.Style>
                         <Style TargetType="Button">
-                            <Setter Property="Background" Value="#462AD8"/>
+                            <Setter Property="Background" Value="{StaticResource color6}"/>
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
                                     <Setter Property="Background" Value="#28AEED"/>
@@ -130,6 +149,22 @@
                                FontWeight="Medium"
                                FontFamily="Montserrat"/>
                     <TextBlock Text="Cambiar"
+                               Foreground="White"
+                               FontSize="12"
+                               FontWeight="Medium"
+                               FontFamily="Montserrat"
+                               Cursor="Hand"
+                               Margin="8,0,0,0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Margin="0,15,0,0">
+                    <TextBlock Text="¿No tienes cuenta?"
+                               Foreground="DarkGray"
+                               FontSize="12"
+                               FontWeight="Medium"
+                               FontFamily="Montserrat"/>
+                    <TextBlock Text="Crear cuenta"
                                Foreground="White"
                                FontSize="12"
                                FontWeight="Medium"

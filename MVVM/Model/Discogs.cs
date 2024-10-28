@@ -5,6 +5,7 @@ using System.Text.Json;
 using System.Collections.Generic;
 using static System.Net.Mime.MediaTypeNames;
 using System.IO;
+using System.Configuration;
 
 namespace ChiclanaRecordsNET.MVVM.Model
 {
@@ -19,14 +20,7 @@ namespace ChiclanaRecordsNET.MVVM.Model
                 BaseAddress = new Uri("https://api.discogs.com/")
             };
 
-            string currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            string apiFilePath = Path.Combine(currentDirectory, "MVVM", "Model", "api.txt");
-
-            System.Diagnostics.Debug.WriteLine($"Path: {apiFilePath}");
-
-            var userToken = File.ReadAllText(apiFilePath).Trim();
-
-            System.Diagnostics.Debug.WriteLine($"Api key: {userToken}");
+            var userToken = ConfigurationManager.AppSettings["DiscogsKey"];
 
             _client.DefaultRequestHeaders.Add("User-Agent", "MyDiscogsApp/1.0");
             _client.DefaultRequestHeaders.Add("Authorization", $"Discogs token={userToken}");

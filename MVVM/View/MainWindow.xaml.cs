@@ -26,15 +26,6 @@ namespace ChiclanaRecordsNET
         {
             MessageBox.Show("Holaa");
         }
-        private void Button_Click_Close(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
-        private void Button_Click_Minimize(object sender, RoutedEventArgs e)
-        {
-            SystemCommands.MinimizeWindow(this);
-        }
 
         private void ButtonGitHub_Click(object sender, RoutedEventArgs e)
         {

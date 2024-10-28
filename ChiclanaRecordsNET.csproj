@@ -36,7 +36,6 @@
     <None Remove="Images\logoupscaledcut.png" />
     <None Remove="Images\unnamed.png" />
     <None Remove="Images\upscaled.png" />
-    <None Remove="MVVM\Model\api.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -107,9 +106,6 @@
     <Content Include="Font\Poppins\Poppins-ThinItalic.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="MVVM\Model\api.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -117,6 +113,7 @@
     <PackageReference Include="Caliburn.Micro.Core" Version="4.0.212" />
     <PackageReference Include="FontAwesome.Sharp" Version="6.6.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
+    <PackageReference Include="Supabase" Version="1.1.1" />
   </ItemGroup>
 
 </Project>

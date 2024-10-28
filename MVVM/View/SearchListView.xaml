@@ -154,8 +154,14 @@
                                                 Height="auto">
                                         <TextBlock Text="{Binding Title}" 
                                                    Foreground="White"/>
-                                        <TextBlock Text="{Binding Country}"
-                                                   Foreground="White"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Country}"
+                                                       Foreground="White"/>
+                                            <TextBlock Text=", "
+                                                       Foreground="White"/>
+                                            <TextBlock Text="{Binding Year}"
+                                                       Foreground="White"/>
+                                        </StackPanel>
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="{Binding LabelFirst}"
                                                        Foreground="White"/>

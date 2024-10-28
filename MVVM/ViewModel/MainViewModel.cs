@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
+using ChiclanaRecordsNET.MVVM.Model;
 
 namespace ChiclanaRecordsNET.MVVM.ViewModel
 {
@@ -23,11 +24,11 @@ namespace ChiclanaRecordsNET.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-
         public RelayCommand NavigateToHomeCommand { get; set; }
         public RelayCommand NavigateToSettingsViewCommand { get; set; }
         public RelayCommand NavigateToLoginCommand { get; set; }
         public RelayCommand NavigateToSearchList { get; private set; }
+        public RelayCommand NavigateToAcercaDe { get; private set; }
         public RelayCommand CloseCommand { get; private set; }
 
         public MainViewModel(INavigationService navService)
@@ -38,6 +39,7 @@ namespace ChiclanaRecordsNET.MVVM.ViewModel
             NavigateToSettingsViewCommand = new RelayCommand(o => { Navigation.NavigateTo<SettingsViewModel>(); }, o => true);
             NavigateToLoginCommand = new RelayCommand(o => { Navigation.NavigateTo<LoginViewModel>(); }, o => true);
             NavigateToSearchList = new RelayCommand(o => { Navigation.NavigateTo<SearchListViewModel>(); }, o => true);
+            NavigateToAcercaDe = new RelayCommand(o => { Navigation.NavigateTo<AcercaDeViewModel>(); }, o => true);
             //CloseCommand = new RelayCommand(o => { ; }, o => true);
         }
     }

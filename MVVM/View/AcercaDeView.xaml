@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="ChiclanaRecordsNET.MVVM.View.AcercaDeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ChiclanaRecordsNET.MVVM.View"
+             mc:Ignorable="d" 
+             Height="850" Width="1130">
+    <Border Background="#660B0500">
+        <StackPanel Width="800" VerticalAlignment="Center" Margin="0, 0, 0 ,40">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="./../../Images/logoupscaledcut.png"
+                                   Width="80"/>
+                <TextBlock Text="Chiclana Records"
+                           FontSize="40"
+                           Foreground="{StaticResource color6}"
+                           VerticalAlignment="Center"
+                           Margin="20"/>
+            </StackPanel>
+            <TextBlock Foreground="{StaticResource titleColor2}"
+                       TextWrapping="Wrap"
+                       FontSize="20"
+                       Margin="0,20,0,0">
+                <TextBlock.Text>
+                    <![CDATA[
+                Chiclana Records es una innovadora aplicación de escritorio 
+                diseñada para  coleccionistas de discos de vinilo y 
+                amantes de la música. 
+                Creada con el objetivo de facilitar la gestión y exploración 
+                de colecciones personales de vinilos, esta plataforma te permite 
+                descubrir, organizar y compartir tus discos favoritos de una forma
+                sencilla y visualmente atractiva.
+                ]]>
+                </TextBlock.Text>
+            </TextBlock>
+            <TextBlock Foreground="{StaticResource titleColor2}"
+                   TextWrapping="Wrap"
+                   FontSize="20"
+                       Margin="0,20,0,0">
+                <TextBlock.Text>
+                    <![CDATA[
+                    Utilizando la poderosa API de Discogs, Chiclana Records te 
+                    brinda acceso a una base de datos extensa y detallada de 
+                    discos de vinilo de todo el mundo. Con nuestra aplicación, 
+                    puedes agregar discos a tu colección, crear listas 
+                    personalizadas, y ver detalles completos sobre cada álbum, 
+                    incluyendo información sobre artistas, lanzamientos, y 
+                    ediciones. Además, puedes interactuar con otros 
+                    coleccionistas, explorar colecciones ajenas e inspirarte 
+                    para futuras adquisiciones.
+                ]]>
+                </TextBlock.Text>
+            </TextBlock>
+        </StackPanel>
+    </Border>
+</UserControl>
