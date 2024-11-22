@@ -52,7 +52,7 @@ namespace ChiclanaRecordsNET.MVVM.Model
         }
 
 
-        public async Task<(User user, string error)> LogIn(string username, SecureString password)
+        public async Task<(User? user, string? error)> LogIn(string username, SecureString password)
         {
             try
             {
@@ -69,7 +69,7 @@ namespace ChiclanaRecordsNET.MVVM.Model
                 try
                 {
                     unmanagedString = Marshal.SecureStringToGlobalAllocUnicode(password);
-                    string passwordString = Marshal.PtrToStringUni(unmanagedString);
+                    string? passwordString = Marshal.PtrToStringUni(unmanagedString);
 
                     var session = await _supabase.Auth.SignIn(result.Email, passwordString);
 
@@ -93,7 +93,7 @@ namespace ChiclanaRecordsNET.MVVM.Model
             }
         }
 
-        public async Task<(bool success, string error)> CreateUser(string username, string email, string password)
+        public async Task<(bool success, string? error)> CreateUser(string username, string email, string password)
         {
             try
             {

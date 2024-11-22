@@ -1,10 +1,28 @@
 ﻿using ChiclanaRecordsNET.Core;
 using ChiclanaRecordsNET.MVVM.Model;
+using System.ComponentModel;
 using System.Security;
 using System.Windows.Input;
 
 namespace ChiclanaRecordsNET.MVVM.ViewModel
 {
+    public class Session 
+    {
+        private static User _user;
+        public static User User
+        {
+            get => _user;
+            set
+            {
+                _user = value;
+                System.Diagnostics.Debug.WriteLine($"Session.User changed - Email: {value?.Email}");
+                StaticPropertyChanged?.Invoke(null, new PropertyChangedEventArgs(nameof(User)));
+            }
+        }
+
+        public static event PropertyChangedEventHandler StaticPropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
+    }
     public class LoginViewModel : Core.ViewModel
     {
         private string _username;
@@ -12,6 +30,19 @@ namespace ChiclanaRecordsNET.MVVM.ViewModel
         private string _errorMessage;
         private bool _isViewVisible = true;
         private bool _isLoading;
+
+        public event Action RequestNavigation;
+        private INavigationService _navigation;
+
+        public INavigationService Navigation
+        {
+            get => _navigation;
+            set
+            {
+                _navigation = value;
+                OnPropertyChanged(nameof(Navigation));
+            }
+        }
 
         public string Username
         {
@@ -53,6 +84,7 @@ namespace ChiclanaRecordsNET.MVVM.ViewModel
             }
         }
 
+
         public bool IsLoading
         {
             get => _isLoading;
@@ -66,11 +98,12 @@ namespace ChiclanaRecordsNET.MVVM.ViewModel
 
         public ICommand LoginCommand { get; }
         private readonly Database _db;
-        private User User { get; set; }
 
-        public LoginViewModel()
+        public LoginViewModel(INavigationService navService)
         {
             _db = new Database();
+            Navigation = navService;
+
             LoginCommand = new RelayCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
         }
 
@@ -94,10 +127,10 @@ namespace ChiclanaRecordsNET.MVVM.ViewModel
 
                 if (user != null)
                 {
-                    User = user;
-                    System.Diagnostics.Debug.WriteLine($"User logged in: {User.Username}, Email: {User.Email}");
+                    Session.User = user;
+                    System.Diagnostics.Debug.WriteLine($"User logged in: {user.Username}, Email: {user.Email}");
                     IsViewVisible = false;  //se esconde
-                                            //po despuesq
+                    Navigation.NavigateTo<HomeViewModel>();//po despuesq
                 }
                 else
                 {

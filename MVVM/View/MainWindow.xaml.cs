@@ -1,13 +1,14 @@
-﻿using System.Windows;
+﻿using System.Drawing;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using Brushes = System.Windows.Media.Brushes;
 
 
 namespace ChiclanaRecordsNET
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -24,7 +25,7 @@ namespace ChiclanaRecordsNET
         }
         private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show("Holaa");
+
         }
 
         private void ButtonGitHub_Click(object sender, RoutedEventArgs e)
@@ -36,7 +37,7 @@ namespace ChiclanaRecordsNET
 
         private void pnlControlBar_MouseEnter(object sender, MouseEventArgs e)
         {
-            this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+            MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
@@ -46,7 +47,7 @@ namespace ChiclanaRecordsNET
 
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
         {
-            this.WindowState = WindowState.Minimized;
+            WindowState = WindowState.Minimized;
         }
     }
 }

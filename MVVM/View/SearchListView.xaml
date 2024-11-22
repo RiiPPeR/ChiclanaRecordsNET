@@ -23,9 +23,13 @@
                     Orientation="Vertical" 
                     Width="200"
                     HorizontalAlignment="Left">
+            <TextBlock Text="Artista"
+                       Foreground="White"/>
             <TextBox x:Name="ArtistTextBox" 
                      Width="300" Margin="5"
                      Text="{Binding Artist}"/>
+            <TextBlock Text="Titulo del disco"
+                       Foreground="White"/>
             <TextBox x:Name="TitleTextBox" 
                      Width="300" Margin="5"
                      Text="{Binding Title}"/>

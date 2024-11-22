@@ -8,5 +8,11 @@ namespace ChiclanaRecordsNET.MVVM.ViewModel
 {
     class HomeViewModel : Core.ViewModel
     {
+        public SessionViewModel SessionVM { get; }
+
+        public HomeViewModel(SessionViewModel sessionVM)
+        {
+            SessionVM = sessionVM;
+        }
     }
 }

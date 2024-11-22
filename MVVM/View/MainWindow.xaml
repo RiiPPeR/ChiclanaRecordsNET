@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChiclanaRecordsNET.MVVM.View" xmlns:local1="clr-namespace:ChiclanaRecordsNET.MVVM.View"
-        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp" xmlns:viewModel="clr-namespace:ChiclanaRecordsNET.MVVM.ViewModel"
         mc:Ignorable="d"
         Title="Chiclana Records" Height="900" Width="1380"
         WindowStyle="None"
@@ -18,8 +18,9 @@
         WindowStartupLocation="CenterScreen"
         >
 
-
-    <Border CornerRadius="12">
+    
+    <Border CornerRadius="12"
+            Name="Border">
         <Border.Background>
             <ImageBrush ImageSource="./../../Images/bg3.jpg"/>
         </Border.Background>
@@ -72,37 +73,11 @@
 
 
 
-                            <TextBlock Text="Chiclana Records"
+                            <TextBlock Text="{Binding SessionVM.CurrentUser.Email}"
                                Foreground="White"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Center"
                                Grid.Column="1"
-                               FontSize="20"
-                               MouseDown="TextBlock_MouseDown">
-                                <TextBlock.Style>
-                                    <Style TargetType="TextBlock">
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver"
-                                             Value="True">
-                                                <Setter Property="Effect">
-                                                    <Setter.Value>
-                                                        <DropShadowEffect ShadowDepth="1" 
-                                                                  Color="White" 
-                                                                  Opacity="1" 
-                                                                  BlurRadius="10"/>
-                                                    </Setter.Value>
-                                                </Setter>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </TextBlock.Style>
-                            </TextBlock>
-
-                            <TextBlock Text="Mi Colección"
-                               Foreground="White"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Center"
-                               Grid.Column="2"
                                FontSize="20"
                                MouseDown="TextBlock_MouseDown">
                                 <TextBlock.Style>
@@ -233,7 +208,8 @@
 
                             <RadioButton Command="{Binding NavigateToHomeCommand}"
                                          Style="{StaticResource menuButton}"
-                                         Tag="{StaticResource color1}">
+                                         Tag="{StaticResource color1}"
+                                         IsEnabled="{Binding SessionVM.IsLoggedIn}">
                                 <StackPanel Orientation="Horizontal">
                                     <fa:IconImage Icon="Home" Style="{StaticResource menuButtonIcon}"/>
                                     <TextBlock Text="Menú principal" Style="{StaticResource menuButtonText}"/>
@@ -242,7 +218,8 @@
 
                             <RadioButton Command="{Binding NavigateToSettingsViewCommand}"
                                          Style="{StaticResource menuButton}"
-                                         Tag="{StaticResource color2}">
+                                         Tag="{StaticResource color2}"
+                                         IsEnabled="{Binding SessionVM.IsLoggedIn}">
                                 <StackPanel Orientation="Horizontal">
                                     <fa:IconImage Icon="Box" Style="{StaticResource menuButtonIcon}"/>
                                     <TextBlock Text="Ajustes" Style="{StaticResource menuButtonText}"/>
@@ -251,7 +228,8 @@
 
                             <RadioButton Command="{Binding NavigateToLoginCommand}"
                                          Style="{StaticResource menuButton}"
-                                         Tag="{StaticResource color3}">
+                                         Tag="{StaticResource color3}"
+                                         IsEnabled="{Binding SessionVM.IsLoggedIn}">
                                 <StackPanel Orientation="Horizontal">
                                     <fa:IconImage Icon="Person" Style="{StaticResource menuButtonIcon}"/>
                                     <TextBlock Text="Log in" Style="{StaticResource menuButtonText}"/>
@@ -260,7 +238,8 @@
 
                             <RadioButton Command="{Binding NavigateToSearchList}"
                                          Style="{StaticResource menuButton}"
-                                         Tag="{StaticResource color8}">
+                                         Tag="{StaticResource color8}"
+                                         IsEnabled="{Binding SessionVM.IsLoggedIn}">
                                 <StackPanel Orientation="Horizontal">
                                     <fa:IconImage Icon="RecordVinyl" Style="{StaticResource menuButtonIcon}"/>
                                     <TextBlock Text="Buscar" Style="{StaticResource menuButtonText}"/>
@@ -269,7 +248,8 @@
 
                             <RadioButton Command="{Binding NavigateToAcercaDe}"
                                          Style="{StaticResource menuButton}"
-                                         Tag="{StaticResource color6}">
+                                         Tag="{StaticResource color6}"
+                                         IsEnabled="{Binding SessionVM.IsLoggedIn}">
                                 <StackPanel Orientation="Horizontal">
                                     <fa:IconImage Icon="QuestionCircle" Style="{StaticResource menuButtonIcon}"/>
                                     <TextBlock Text="Acerca de nosotros" Style="{StaticResource menuButtonText}"/>

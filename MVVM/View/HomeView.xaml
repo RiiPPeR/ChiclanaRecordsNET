@@ -25,6 +25,19 @@
                            Foreground="White"
                            FontSize="30"
                            VerticalAlignment="Center"/>
+
+            <TextBlock Text="{Binding SessionVM.CurrentUser.Username}"
+               Foreground="White"
+               FontSize="30"
+               VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding SessionVM.CurrentUser.Email}"
+               Foreground="White"
+               FontSize="30"
+               VerticalAlignment="Center"/>            
+            <TextBlock Text="{Binding SessionVM.CurrentUser.Id}"
+               Foreground="White"
+               FontSize="30"
+               VerticalAlignment="Center"/>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
 using ChiclanaRecordsNET.MVVM.Model;
+using System.Windows.Media;
+using System.ComponentModel;
 
 namespace ChiclanaRecordsNET.MVVM.ViewModel
 {
@@ -21,9 +23,10 @@ namespace ChiclanaRecordsNET.MVVM.ViewModel
             set
             {
                 _navigation = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(Navigation));
             }
         }
+
         public RelayCommand NavigateToHomeCommand { get; set; }
         public RelayCommand NavigateToSettingsViewCommand { get; set; }
         public RelayCommand NavigateToLoginCommand { get; set; }
@@ -31,16 +34,22 @@ namespace ChiclanaRecordsNET.MVVM.ViewModel
         public RelayCommand NavigateToAcercaDe { get; private set; }
         public RelayCommand CloseCommand { get; private set; }
 
-        public MainViewModel(INavigationService navService)
+        public SessionViewModel SessionVM { get; }
+
+
+        public MainViewModel(INavigationService navService, SessionViewModel sessionViewModel)
         {
             Navigation = navService;
             Navigation.NavigateTo<LoginViewModel>();
+
             NavigateToHomeCommand = new RelayCommand(o => { Navigation.NavigateTo<HomeViewModel>(); }, o => true);
             NavigateToSettingsViewCommand = new RelayCommand(o => { Navigation.NavigateTo<SettingsViewModel>(); }, o => true);
             NavigateToLoginCommand = new RelayCommand(o => { Navigation.NavigateTo<LoginViewModel>(); }, o => true);
             NavigateToSearchList = new RelayCommand(o => { Navigation.NavigateTo<SearchListViewModel>(); }, o => true);
             NavigateToAcercaDe = new RelayCommand(o => { Navigation.NavigateTo<AcercaDeViewModel>(); }, o => true);
-            //CloseCommand = new RelayCommand(o => { ; }, o => true);
+            //CloseCommand = new RelayCommand(o => { ; }, o => true
+
+            SessionVM = sessionViewModel;
         }
     }
 }
