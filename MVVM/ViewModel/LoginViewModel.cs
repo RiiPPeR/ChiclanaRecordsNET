@@ -97,6 +97,8 @@ namespace ChiclanaRecordsNET.MVVM.ViewModel
         }
 
         public ICommand LoginCommand { get; }
+        public RelayCommand NavigateToCreateUser { get; }
+
         private readonly Database _db;
 
         public LoginViewModel(INavigationService navService)
@@ -105,6 +107,7 @@ namespace ChiclanaRecordsNET.MVVM.ViewModel
             Navigation = navService;
 
             LoginCommand = new RelayCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
+            NavigateToCreateUser = new RelayCommand(o => { Navigation.NavigateTo<CreateUserViewModel>(); }, o => true);
         }
 
         private bool CanExecuteLoginCommand(object obj)
@@ -129,11 +132,16 @@ namespace ChiclanaRecordsNET.MVVM.ViewModel
                 {
                     Session.User = user;
                     System.Diagnostics.Debug.WriteLine($"User logged in: {user.Username}, Email: {user.Email}");
-                    IsViewVisible = false;  //se esconde
-                    Navigation.NavigateTo<HomeViewModel>();//po despuesq
+                    IsViewVisible = false;  
+                    Navigation.NavigateTo<HomeViewModel>();
+                    
                 }
                 else
                 {
+                    if (error.Contains("400"))
+                    {
+                        error = "Contraseña incorrecta";
+                    }
                     ErrorMessage = error ?? "Fallo de inicio de sesion";
                 }
             }

@@ -22,11 +22,11 @@ namespace ChiclanaRecordsNET.MVVM.Model
             _client.DefaultRequestHeaders.Add("Authorization", $"Discogs token={userToken}");
         }
 
-        public async Task<SearchResponse> GetSearchAsync (string artist, string title)
+        public async Task<SearchResponse> GetSearchAsync (string artist, string title, string country, string track)
         {
             try
             {
-                var response = await _client.GetAsync($"database/search?format=vinyl&artist={artist}&title={title}&type=release&country=spain");
+                var response = await _client.GetAsync($"database/search?format=vinyl&artist={artist}&title={title}&type=release&country={country}&track={track}");
                 response.EnsureSuccessStatusCode();
 
                 var content = await response.Content.ReadAsStringAsync();

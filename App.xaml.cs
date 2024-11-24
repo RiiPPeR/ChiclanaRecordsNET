@@ -28,6 +28,7 @@ namespace ChiclanaRecordsNET
             services.AddSingleton<RecordViewModel>();
             services.AddSingleton<AcercaDeViewModel>();
             services.AddSingleton<SessionViewModel>();
+            services.AddSingleton<CreateUserViewModel>();
 
             services.AddSingleton<Func<Type, ViewModel>>(serviceProvider => viewModelType => (ViewModel)serviceProvider.GetRequiredService(viewModelType));
 

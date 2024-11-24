@@ -7,25 +7,34 @@
              mc:Ignorable="d" 
              Height="850" Width="1130">
     <Grid Background="#660B0500">
-        <StackPanel>
-            <Image Source="./../../Images/upscaled.png"
-                   Width="100"
-                   HorizontalAlignment="Left"/>
-
-
+        <StackPanel Margin="20">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Chiclana Records"
-                           Foreground="White"
-                           FontSize="50"
-                           VerticalAlignment="Center"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Bienvenido, "
+                               Foreground="White"
+                               FontSize="40"
+                               VerticalAlignment="Center"
+                               Grid.Column="0"/>
+                    <TextBlock Text="{Binding SessionVM.CurrentUser.Username}"
+                               Foreground="White"
+                               FontSize="40"
+                               VerticalAlignment="Center"
+                               Grid.Column="1"/>
+                </Grid>
 
             </StackPanel>
 
-            <TextBlock Text="Vinyl record collection"
-                           Foreground="White"
-                           FontSize="30"
-                           VerticalAlignment="Center"/>
-
+            <TextBlock Text="{Binding Fecha}"
+                       Foreground="{StaticResource color10}"
+                       FontSize="40"
+                       VerticalAlignment="Center"
+                       Grid.Column="3"/>
             <TextBlock Text="{Binding SessionVM.CurrentUser.Username}"
                Foreground="White"
                FontSize="30"

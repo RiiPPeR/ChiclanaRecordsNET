@@ -16,32 +16,139 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
-
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Row="0" 
-                    Orientation="Vertical" 
-                    Width="200"
+        <StackPanel Orientation="Horizontal"
+                    Height="100">
+            <StackPanel Orientation="Vertical" 
+                    Width="500"
                     HorizontalAlignment="Left">
-            <TextBlock Text="Artista"
-                       Foreground="White"/>
-            <TextBox x:Name="ArtistTextBox" 
-                     Width="300" Margin="5"
-                     Text="{Binding Artist}"/>
-            <TextBlock Text="Titulo del disco"
-                       Foreground="White"/>
-            <TextBox x:Name="TitleTextBox" 
-                     Width="300" Margin="5"
-                     Text="{Binding Title}"/>
+
+                <Grid Height="50"
+                  HorizontalAlignment="Right">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Artista"
+                           Foreground="{StaticResource color6}"
+                           FontSize="20"
+                           VerticalAlignment="Center"/>
+                    <Border Grid.Column="1"
+                            CornerRadius="10">
+                        <TextBox x:Name="ArtistTextBox" 
+                                 Style="{StaticResource RoundedTextBox}"
+                                 Width="300"
+                                 Margin="5"
+                                 Text="{Binding Artist}"
+                                 HorizontalAlignment="Right"
+                                 Background="{StaticResource color1transparent}"
+                                 FontSize="18"
+                                 Foreground="White"
+                                 BorderThickness="0"
+                                 VerticalContentAlignment="Center"/>
+                    </Border>
+                </Grid>
+
+                <Grid Height="50"
+                  HorizontalAlignment="Right">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Titulo del disco"
+                           Foreground="{StaticResource color6}"
+                           FontSize="20"
+                           VerticalAlignment="Center"/>
+                    <TextBox x:Name="TitleTextBox"
+                             Style="{StaticResource RoundedTextBox}"
+                             Width="300" Margin="5"
+                             Grid.Column="1"
+                             Text="{Binding Title}"
+                             HorizontalAlignment="Right"
+                             Background="{StaticResource color1transparent}"
+                             FontSize="18"
+                             Foreground="White"
+                             BorderThickness="0"
+                             VerticalContentAlignment="Center"/>
+                </Grid>
+
+
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" 
+                    Width="400"
+                    HorizontalAlignment="Left">
+
+                <Grid Height="50"
+                  HorizontalAlignment="Right">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="País"
+                           Foreground="{StaticResource color6}"
+                           FontSize="20"
+                           VerticalAlignment="Center"/>
+                    <Border Grid.Column="1"
+                            CornerRadius="10">
+                        <TextBox x:Name="CountrytTextBox" 
+                                 Style="{StaticResource RoundedTextBox}"
+                                 Width="300"
+                                 Margin="5"
+                                 Text="{Binding Country}"
+                                 HorizontalAlignment="Right"
+                                 Background="{StaticResource color1transparent}"
+                                 FontSize="18"
+                                 Foreground="White"
+                                 BorderThickness="0"
+                                 VerticalContentAlignment="Center"/>
+                    </Border>
+                </Grid>
+
+                <Grid Height="50"
+                  HorizontalAlignment="Right">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Canción"
+                           Foreground="{StaticResource color6}"
+                           FontSize="20"
+                           VerticalAlignment="Center"/>
+                    <TextBox x:Name="LabelTextBox"
+                             Style="{StaticResource RoundedTextBox}"
+                             Width="300" Margin="5"
+                             Grid.Column="1"
+                             Text="{Binding Track}"
+                             HorizontalAlignment="Right"
+                             Background="{StaticResource color1transparent}"
+                             FontSize="18"
+                             Foreground="White"
+                             BorderThickness="0"
+                             VerticalContentAlignment="Center"/>
+                </Grid>
+
+
+            </StackPanel>
+
+
+
             <Button Content="Buscar" 
-                    Command="{Binding SearchCommand}" 
-                    Margin="5" 
-                    Foreground="White"
-                    FontSize="25">
+                Command="{Binding SearchCommand}" 
+                Margin="5" 
+                Foreground="White"
+                FontSize="25"
+                Grid.Column="1"
+                HorizontalAlignment="Left">
 
                 <Button.Style>
                     <Style TargetType="Button">
-                        <Setter Property="Background" Value="#99081f45"/>
+                        <Setter Property="Background" Value="{StaticResource color5}"/>
                         <Setter Property="Cursor" Value="Hand"/>
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
@@ -53,10 +160,10 @@
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Border Width="150" Height="40"
-                                        CornerRadius="13"
-                                        Background="{TemplateBinding Background}">
+                            CornerRadius="13"
+                            Background="{TemplateBinding Background}">
                             <ContentPresenter VerticalAlignment="Center"
-                                                      HorizontalAlignment="Center"/>
+                                          HorizontalAlignment="Center"/>
 
                         </Border>
                     </ControlTemplate>
@@ -72,7 +179,7 @@
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type Thumb}">
                                 <Border CornerRadius="5" 
-                                Background="#CC081f45"/>
+                                Background="{StaticResource color2transparent}"/>
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
@@ -100,7 +207,7 @@
             </ScrollViewer.Resources>
 
 
-            <ItemsControl ItemsSource="{Binding Responses}">
+            <!--<ItemsControl ItemsSource="{Binding Responses}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="3"
@@ -110,32 +217,6 @@
 
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <!--<Grid Margin="5, 5, 5, 5">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50"/>
-                                <ColumnDefinition Width="250"/>
-                            </Grid.ColumnDefinitions>
-
-                            <Image Source="{Binding Thumb}" 
-                               Width="50" Height="50"
-                               Grid.Column="0"/>
-
-                            <StackPanel Grid.Column="1" Width="auto">
-                                <TextBlock Text="{Binding Title}" 
-                                   Foreground="White"/>
-                                <TextBlock Text="{Binding Country}"
-                                   Foreground="White"/>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding LabelFirst}"
-                                               Foreground="White"/>
-                                    <TextBlock Text=" - "
-                                               Foreground="White"/>
-                                    <TextBlock Text="{Binding Catno}"
-                                               Foreground="White"/>
-                                </StackPanel>
-                            </StackPanel>
-                        </Grid>-->
-
                         <Button Foreground="White"
                                 FontSize="15"
                                 FontWeight="Medium"
@@ -180,11 +261,13 @@
 
                             <Button.Style>
                                 <Style TargetType="Button">
-                                    <Setter Property="Background" Value="#99081f45"/>
+                                    <Setter Property="Background" Value="{StaticResource color1transparent}"/>
                                     <Setter Property="Cursor" Value="Hand"/>
                                     <Style.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
                                             <Setter Property="Background" Value="#99010409"/>
+                                            <Setter Property="Width" Value="380"/>
+                                            <Setter Property="Height" Value="120"/>
                                         </Trigger>
                                     </Style.Triggers>
                                 </Style>
@@ -197,6 +280,143 @@
                                         <ContentPresenter VerticalAlignment="Center"
                                                           HorizontalAlignment="Left"/>
                                         
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>-->
+            <ItemsControl ItemsSource="{Binding Responses}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="3"
+                                     VerticalAlignment="Top"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Foreground="White"
+                                FontSize="15"
+                                FontWeight="Medium"
+                                Margin="5"
+                                Command="{Binding DataContext.RecordClicked, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                CommandParameter="{Binding}">
+                            <Grid>
+                                <Grid Margin="10, 5, 5, 5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Source="{Binding Thumb}" 
+                                           Width="50" Height="50"
+                                           Grid.Column="0"/>
+                                    <StackPanel Grid.Column="1"
+                                                Margin="10"
+                                                Height="auto">
+                                        
+                                        
+                                        <!--<TextBlock Text="{Binding Title}" 
+                                                   Foreground="White"/>-->
+
+                                        <ScrollViewer HorizontalScrollBarVisibility="Hidden" 
+                                                      VerticalScrollBarVisibility="Hidden"
+                                                      IsHitTestVisible="False">
+                                            <TextBlock Name="ScrollingTitle"
+                                                       Text="{Binding Title}"
+                                                       Foreground="White"
+                                                       Loaded="ScrollingTitle_Loaded"
+                                                       TextWrapping="NoWrap">
+                                                <TextBlock.RenderTransform>
+                                                    <TranslateTransform x:Name="ScrollTransform" X="0"/>
+                                                </TextBlock.RenderTransform>
+                                            </TextBlock>
+                                        </ScrollViewer>
+
+
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Country}"
+                                                       Foreground="White"/>
+                                            <TextBlock Text=", "
+                                                       Foreground="White"/>
+                                            <TextBlock Text="{Binding Year}"
+                                                       Foreground="White"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding LabelFirst}"
+                                                       Foreground="White"/>
+                                            <TextBlock Text=" - "
+                                                       Foreground="White"/>
+                                            <TextBlock Text="{Binding Catno}"
+                                                       Foreground="White"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="{StaticResource color1transparent}"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                    <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                                    <Setter Property="RenderTransform">
+                                        <Setter.Value>
+                                            <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#99010409"/>
+                                            <Trigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                                                         To="1.055" 
+                                                                         Duration="0:0:0.2">
+                                                            <DoubleAnimation.EasingFunction>
+                                                                <CubicEase EasingMode="EaseOut"/>
+                                                            </DoubleAnimation.EasingFunction>
+                                                        </DoubleAnimation>
+                                                        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                                                         To="1.055" 
+                                                                         Duration="0:0:0.2">
+                                                            <DoubleAnimation.EasingFunction>
+                                                                <CubicEase EasingMode="EaseOut"/>
+                                                            </DoubleAnimation.EasingFunction>
+                                                        </DoubleAnimation>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </Trigger.EnterActions>
+                                            <Trigger.ExitActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                                                         To="1" 
+                                                                         Duration="0:0:0.2">
+                                                            <DoubleAnimation.EasingFunction>
+                                                                <CubicEase EasingMode="EaseOut"/>
+                                                            </DoubleAnimation.EasingFunction>
+                                                        </DoubleAnimation>
+                                                        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                                                         To="1" 
+                                                                         Duration="0:0:0.2">
+                                                            <DoubleAnimation.EasingFunction>
+                                                                <CubicEase EasingMode="EaseOut"/>
+                                                            </DoubleAnimation.EasingFunction>
+                                                        </DoubleAnimation>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </Trigger.ExitActions>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Width="356" Height="100"
+                                            CornerRadius="13"
+                                            Background="{TemplateBinding Background}">
+                                        <ContentPresenter VerticalAlignment="Center"
+                                                          HorizontalAlignment="Left"/>
                                     </Border>
                                 </ControlTemplate>
                             </Button.Template>

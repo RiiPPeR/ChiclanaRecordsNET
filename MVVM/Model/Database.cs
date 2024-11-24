@@ -1,10 +1,12 @@
 ﻿using Supabase;
 using Supabase.Gotrue.Exceptions;
 using Supabase.Postgrest.Attributes;
+using Supabase.Postgrest.Exceptions;
 using Supabase.Postgrest.Models;
 using System.Configuration;
 using System.Runtime.InteropServices;
 using System.Security;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 
 namespace ChiclanaRecordsNET.MVVM.Model
@@ -13,13 +15,11 @@ namespace ChiclanaRecordsNET.MVVM.Model
     public class User : BaseModel
     {
         [PrimaryKey("id")]
+        [Column("id")]
         public Guid Id { get; set; }
 
         [Column("email")]
         public string Email { get; set; }
-
-        [Column("password")]
-        public string Password { get; set; }
 
         [Column("username")]
         public string Username { get; set; }
@@ -77,6 +77,7 @@ namespace ChiclanaRecordsNET.MVVM.Model
                     {
                         return (result, null);
                     }
+
                     return (null, "Contraseña incorrecta");
                 }
                 finally
@@ -93,11 +94,24 @@ namespace ChiclanaRecordsNET.MVVM.Model
             }
         }
 
-        public async Task<(bool success, string? error)> CreateUser(string username, string email, string password)
+        public async Task<(bool success, string? error)> CreateUser(string username, string email, SecureString password)
         {
             try
             {
-                var authResponse = await _supabase.Auth.SignUp(email, password);
+                IntPtr unmanagedString = IntPtr.Zero;
+                unmanagedString = Marshal.SecureStringToGlobalAllocUnicode(password);
+                string? passwordString = Marshal.PtrToStringUni(unmanagedString);
+
+                var result = await _supabase.From<User>()
+                    .Where(x => x.Username == username)
+                    .Single();
+
+                if (result != null)
+                {
+                    return (false, "Ese usuario ya existe");
+                }
+
+                var authResponse = await _supabase.Auth.SignUp(email, passwordString);
 
                 if (authResponse?.User != null)
                 {
@@ -106,7 +120,6 @@ namespace ChiclanaRecordsNET.MVVM.Model
                         Id = Guid.Parse(authResponse.User.Id),
                         Username = username,
                         Email = email,
-                        Password = password,
                         Records = new List<int>(),
                         Friends = new List<Guid>(),
                         CreatedAt = DateTime.UtcNow
@@ -122,6 +135,65 @@ namespace ChiclanaRecordsNET.MVVM.Model
             catch (GotrueException ex)
             {
                 return (false, ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return (false, ex.Message);
+            }
+        }
+
+        public async Task<(bool success, string? error)> AddRecordToCollection(Guid id, int record_id)
+        {
+            try
+            {
+                var user = await _supabase.From<User>()
+                    .Where(x => x.Id == id)
+                    .Single();
+
+                if (user == null)
+                {
+                    return (false, "Usuario no encontrado");
+                }
+
+                if (user.Records.Contains(record_id))
+                {
+                    return (false, "Ya has añadido ese disco.");
+                }
+
+                user.Records.Add(record_id);
+
+                await _supabase
+                    .From<User>()
+                    .Update(user);
+
+                return (true, null);
+            }
+            catch (Exception ex)
+            {
+                return (false, ex.Message);
+            }
+        }
+
+        public async Task<(bool success, string? error)> DeleteRecordFromCollection(Guid id, int record_id)
+        {
+            try
+            {
+                var user = await _supabase.From<User>()
+                    .Where(x => x.Id == id)
+                    .Single();
+
+                if (user == null)
+                {
+                    return (false, "Usuario no encontrado");
+                }
+
+                user.Records.Remove(record_id);
+
+                await _supabase
+                    .From<User>()
+                    .Update(user);
+
+                return (true, null);
             }
             catch (Exception ex)
             {

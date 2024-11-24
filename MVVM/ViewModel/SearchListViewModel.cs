@@ -10,6 +10,8 @@ namespace ChiclanaRecordsNET.MVVM.ViewModel
     {
         private string _artist;
         private string _title;
+        private string _country;
+        private string _track;
         public string Artist
         {
             get => _artist;
@@ -25,6 +27,26 @@ namespace ChiclanaRecordsNET.MVVM.ViewModel
             set
             {
                 _title = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Country
+        {
+            get => _country;
+            set
+            {
+                _country = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Track
+        {
+            get => _track;
+            set
+            {
+                _track = value;
                 OnPropertyChanged();
             }
         }
@@ -50,27 +72,27 @@ namespace ChiclanaRecordsNET.MVVM.ViewModel
             Navigation = navService;
             Responses = new BindableCollection<SearchResult>();
             SearchCommand = new RelayCommand(o =>
-            {
-                System.Diagnostics.Debug.WriteLine($"Artista: '{Artist}' Titulo: '{Title}'");
-                InitializeAsync(Artist, Title);
-            }, o => true);
+                {
+                    System.Diagnostics.Debug.WriteLine($"Artista: '{Artist}' Titulo: '{Title}' Pais: '{Country}' Cancion: '{Track}'");
+                    InitializeAsync(Artist, Title, Country, Track);
+                }, o => true);
 
             RecordClicked = new RelayCommand( OnRecordButtonClicked, o => true);
         }
-        public async Task InitializeAsync(string artist, string title)
+        public async void InitializeAsync(string artist, string title, string country, string track)
         {
             DiscogsSearch search = new DiscogsSearch();
-            var results = await search.GetSearchAsync(artist, title);
+            var results = await search.GetSearchAsync(artist, title, country, track);
 
             if (results?.Results != null && results.Results.Count > 0)
             {
                 Responses.Clear();
                 Responses.AddRange(results.Results);
-                System.Diagnostics.Debug.WriteLine($"{Responses.Count} results added.");
+                System.Diagnostics.Debug.WriteLine($"{Responses.Count} resultados.");
             }
             else
             {
-                System.Diagnostics.Debug.WriteLine("No results found.");
+                System.Diagnostics.Debug.WriteLine("No se ha encontrado nada.");
             }
         }
 
@@ -78,7 +100,7 @@ namespace ChiclanaRecordsNET.MVVM.ViewModel
         {
             if (parameter is SearchResult selectedRecord)
             {
-                System.Diagnostics.Debug.WriteLine($"Selected Record - ID: '{selectedRecord.Id}'");
+                System.Diagnostics.Debug.WriteLine($"Record - ID: '{selectedRecord.Id}'");
 
                 Navigation.NavigateTo<RecordViewModel>(selectedRecord.Id);
             }

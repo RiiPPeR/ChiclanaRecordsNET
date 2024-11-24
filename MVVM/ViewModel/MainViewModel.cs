@@ -10,6 +10,8 @@ using System.Windows;
 using ChiclanaRecordsNET.MVVM.Model;
 using System.Windows.Media;
 using System.ComponentModel;
+using System.Globalization;
+using System.Windows.Data;
 
 namespace ChiclanaRecordsNET.MVVM.ViewModel
 {
@@ -47,7 +49,6 @@ namespace ChiclanaRecordsNET.MVVM.ViewModel
             NavigateToLoginCommand = new RelayCommand(o => { Navigation.NavigateTo<LoginViewModel>(); }, o => true);
             NavigateToSearchList = new RelayCommand(o => { Navigation.NavigateTo<SearchListViewModel>(); }, o => true);
             NavigateToAcercaDe = new RelayCommand(o => { Navigation.NavigateTo<AcercaDeViewModel>(); }, o => true);
-            //CloseCommand = new RelayCommand(o => { ; }, o => true
 
             SessionVM = sessionViewModel;
         }

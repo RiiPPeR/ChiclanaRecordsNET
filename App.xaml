@@ -30,6 +30,9 @@
             <DataTemplate DataType="{x:Type viewModel:AcercaDeViewModel}">
                 <view:AcercaDeView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:CreateUserViewModel}">
+                <view:CreateUserView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

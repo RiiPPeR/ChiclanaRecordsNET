@@ -10,9 +10,22 @@ namespace ChiclanaRecordsNET.MVVM.ViewModel
     {
         public SessionViewModel SessionVM { get; }
 
+        private string _fecha;
+        public string Fecha
+        {
+            get => _fecha;
+            set
+            {
+                _fecha = value;
+                OnPropertyChanged(nameof(Fecha));
+            }
+        }
+
         public HomeViewModel(SessionViewModel sessionVM)
         {
             SessionVM = sessionVM;
+            DateTime today = DateTime.Today;
+            Fecha = today.ToString().Substring(0, 10);
         }
     }
 }

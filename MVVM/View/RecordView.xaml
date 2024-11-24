@@ -5,49 +5,436 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ChiclanaRecordsNET.MVVM.View"
              mc:Ignorable="d" 
-             Height="850" Width="1380"
+             Height="850" Width="1130"
              Background="#660B0500">
-    <StackPanel Orientation="Vertical">
-       
-        <TextBlock Text="{Binding Release.title, FallbackValue='Loading...'}"
-                   FontSize="50"
-                   Foreground="White"/>
-        <TextBlock Text="{Binding Release.country, FallbackValue='Loading...'}"
-                   Foreground="White"
-                   FontSize="50"/>
-        <TextBlock Text="{Binding Release.id, FallbackValue='Loading...'}"
-                   Foreground="White"
-                   FontSize="50"/>
+    <UserControl.Resources>
+        <Style x:Key="ImageHoverStyle" TargetType="Image">
+            <Setter Property="Width" Value="170"/>
+            <Setter Property="Height" Value="170"/>
+            <Setter Property="Margin" Value="0,20,0,0"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
 
-        <ItemsControl ItemsSource="{Binding Release.artists, FallbackValue='./../../Images/upscaled.png'}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
 
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding name, FallbackValue='Loading...'}"
-                               Foreground="White"
-                               FontSize="50"/>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+    </UserControl.Resources>
 
-        <ItemsControl ItemsSource="{Binding Release.images, FallbackValue='./../../Images/upscaled.png'}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
 
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Image Source="{Binding resource_url, FallbackValue='./../../Images/upscaled.png'}" 
-                           Width="170" Height="170"/>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-    </StackPanel>
+    <Grid>
+        <StackPanel Orientation="Horizontal">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    
+                </Grid.RowDefinitions>
+                
+                <StackPanel Grid.Row="0"
+                            Orientation="Vertical" 
+                            Width="460"
+                            Height="800"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Margin="10, 10, 0, 0">
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Nombre: "
+                       FontSize="20"
+                       Foreground="White"/>
+                        <TextBlock Text="{Binding Release.title, FallbackValue='Cargando...'}"
+                                   FontSize="20"
+                                   Foreground="{StaticResource color6}"
+                                   TextWrapping="Wrap"
+                                   Width="350"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Artista: "
+                               FontSize="20"
+                               Foreground="White"/>
+                        <ItemsControl ItemsSource="{Binding Release.artists}"
+                          Width="1255">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding name, FallbackValue='Loading...'}"
+                                       Foreground="{StaticResource color6}"
+                                       FontSize="20"/>
+                                        <TextBlock Text=" "
+                                       Foreground="{StaticResource color6}"
+                                       FontSize="20"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="País: "
+                       FontSize="20"
+                       Foreground="White"/>
+                        <TextBlock Text="{Binding Release.country}"
+                       Foreground="{StaticResource color6}"
+                       FontSize="20"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="ID: "
+                       FontSize="20"
+                       Foreground="White"/>
+                        <TextBlock Text="{Binding Release.id}"
+                       Foreground="{StaticResource color6}"
+                       FontSize="20"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Lanzado: "
+                       FontSize="20"
+                       Foreground="White"/>
+                        <TextBlock Text="{Binding Release.released}"
+                       Foreground="{StaticResource color6}"
+                       FontSize="20"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Label: "
+                               FontSize="20"
+                               Foreground="White"/>
+                        <ItemsControl ItemsSource="{Binding Release.labels}"
+                                  Width="1255">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding catno, FallbackValue='Loading...'}"
+                                               Foreground="{StaticResource color6}"
+                                               FontSize="20"/>
+                                        <TextBlock Text=", "
+                                               Foreground="{StaticResource color6}"
+                                               FontSize="20"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Rating: "
+                       FontSize="20"
+                       Foreground="White"/>
+                        <TextBlock Text="{Binding Release.community.rating.average}"
+                       Foreground="{StaticResource color6}"
+                       FontSize="20"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Estilo: "
+                               FontSize="20"
+                               Foreground="White"/>
+                        <ItemsControl ItemsSource="{Binding Release.styles}"
+                                  Width="1255">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding }"
+                                               Foreground="{StaticResource color6}"
+                                               FontSize="20"/>
+                                        <TextBlock Text=", "
+                                               Foreground="{StaticResource color6}"
+                                               FontSize="20"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </StackPanel>
+
+                <Button Content="Añadir disco a mi colección" 
+                        Grid.Row="1"
+                        Command="{Binding AddRecord}" 
+                        Foreground="White"
+                        FontSize="25"
+                        VerticalAlignment="Bottom"
+                        IsEnabled="{Binding IsAddable}"
+                        >
+
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{StaticResource color2}"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#99010409"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Width="360" Height="40"
+                                    CornerRadius="13"
+                                    Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"/>
+
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button Content="Eliminar disco de mi colección." 
+                        Grid.Row="2"
+                        Command="{Binding DeleteRecord}" 
+                        Foreground="White"
+                        FontSize="25"
+                        VerticalAlignment="Bottom"
+                        IsEnabled="{Binding IsDeletable}">
+
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{StaticResource color5transparent}"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#99010409"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Width="360" Height="40"
+                                    CornerRadius="13"
+                                    Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"/>
+
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+
+
+
+            <StackPanel Orientation="Vertical"
+                         Margin="0, 10, 0, 0">
+                <TextBlock Text="Canciones: "
+                            FontSize="20"
+                            Foreground="White"/>
+
+                <ScrollViewer  VerticalScrollBarVisibility="Auto"
+                                
+                                HorizontalAlignment="Left"
+                                Height="800"
+                                Width="450">
+
+                    <ScrollViewer.Resources>
+                        <Style x:Key="ScrollBarThumbA" TargetType="{x:Type Thumb}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Thumb}">
+                                        <Border CornerRadius="5" 
+                                        Background="{StaticResource color2transparent}"/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+
+                        <Style TargetType="{x:Type ScrollBar}">
+                            <Setter Property="Width" Value="8"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ScrollBar}">
+                                        <Grid>
+                                            <Border Background="Transparent"/>
+                                            <Track  x:Name="PART_Track"
+                                                    IsDirectionReversed="True">
+                                                <Track.Thumb>
+                                                    <Thumb Style="{DynamicResource ScrollBarThumbA}"/>
+                                                </Track.Thumb>
+                                            </Track>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ScrollViewer.Resources>
+
+                    <ItemsControl ItemsSource="{Binding Release.tracklist}"
+                               Width="450">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal"
+                                         Margin="0, 10, 0 ,0">
+                                    <TextBlock Text="{Binding position}"
+                                            Foreground="{StaticResource color6}"
+                                            FontSize="20"
+                                            TextWrapping="WrapWithOverflow"
+                                            Width="60"/>
+                                    <TextBlock Text="{Binding title, FallbackValue='Loading...'}"
+                                            Foreground="{StaticResource color6}"
+                                            FontSize="20"
+                                            Width="320"
+                                            TextWrapping="WrapWithOverflow"/>
+                                    <TextBlock Text="{Binding duration}"
+                                            Foreground="{StaticResource color6}"
+                                            FontSize="20"
+                                            TextWrapping="WrapWithOverflow"
+                                            Width="50"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                </ScrollViewer>
+
+
+                <!--<ItemsControl ItemsSource="{Binding Release.tracklist}"
+                               Width="450">
+                     <ItemsControl.ItemsPanel>
+                         <ItemsPanelTemplate>
+                             <StackPanel Orientation="Vertical"/>
+                         </ItemsPanelTemplate>
+                     </ItemsControl.ItemsPanel>
+             
+                     <ItemsControl.ItemTemplate>
+                         <DataTemplate>
+                             <StackPanel Orientation="Horizontal"
+                                         Margin="0, 10, 0 ,0">
+                                 <TextBlock Text="{Binding position}"
+                                            Foreground="{StaticResource color6}"
+                                            FontSize="20"
+                                            TextWrapping="WrapWithOverflow"
+                                            Width="100"/>
+                                 <TextBlock Text="{Binding title, FallbackValue='Loading...'}"
+                                            Foreground="{StaticResource color6}"
+                                            FontSize="20"
+                                            Width="300"
+                                            TextWrapping="WrapWithOverflow"/>
+                                 <TextBlock Text="{Binding duration}"
+                                            Foreground="{StaticResource color6}"
+                                            FontSize="20"
+                                            TextWrapping="WrapWithOverflow"
+                                            Width="50"/>
+                             </StackPanel>
+                         </DataTemplate>
+                     </ItemsControl.ItemTemplate>
+                 </ItemsControl>-->
+            </StackPanel>
+
+
+
+
+
+            <ScrollViewer  VerticalScrollBarVisibility="Auto"
+                       Width="200">
+
+                <ScrollViewer.Resources>
+                    <Style x:Key="ScrollBarThumb" TargetType="{x:Type Thumb}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Thumb}">
+                                    <Border CornerRadius="5" 
+                                        Background="{StaticResource color2transparent}"/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+
+                    <Style TargetType="{x:Type ScrollBar}">
+                        <Setter Property="Width" Value="8"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ScrollBar}">
+                                    <Grid>
+                                        <Border Background="Transparent"/>
+                                        <Track  x:Name="PART_Track"
+                                            IsDirectionReversed="True">
+                                            <Track.Thumb>
+                                                <Thumb Style="{StaticResource ScrollBarThumb}"/>
+                                            </Track.Thumb>
+                                        </Track>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ScrollViewer.Resources>
+
+
+                <ItemsControl ItemsSource="{Binding Release.images, FallbackValue='./../../Images/upscaled.png'}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Image Source="{Binding resource_url, FallbackValue='./../../Images/upscaled.png'}"
+                                       Style="{StaticResource ImageHoverStyle}"
+                                       MouseEnter="Image_MouseEnter"
+                                       MouseLeave="Image_MouseLeave"/>
+
+                                <Popup x:Name="ImagePopup"
+                                       PlacementTarget="{Binding ElementName=ParentControl}"
+                                       Placement="Left"
+                                       AllowsTransparency="True"
+                                       PopupAnimation="Fade"
+                                       IsOpen="False">
+                                    <Border Background="{StaticResource color1transparent}"
+                                            CornerRadius="10"
+                                            Padding="10">
+                                        <Image Source="{Binding resource_url}"
+                                               Width="600"
+                                               Height="600">
+                                            <Image.Effect>
+                                                <DropShadowEffect BlurRadius="15"
+                                                                  ShadowDepth="0"
+                                                                  Color="Black"/>
+                                            </Image.Effect>
+                                        </Image>
+                                    </Border>
+                                </Popup>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+
+                </ItemsControl>
+
+            </ScrollViewer>
+
+        </StackPanel>
+    </Grid>
 </UserControl>

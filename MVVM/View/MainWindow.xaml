@@ -4,7 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChiclanaRecordsNET.MVVM.View" xmlns:local1="clr-namespace:ChiclanaRecordsNET.MVVM.View"
-        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp" xmlns:viewModel="clr-namespace:ChiclanaRecordsNET.MVVM.ViewModel"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp" 
+        xmlns:viewModel="clr-namespace:ChiclanaRecordsNET.MVVM.ViewModel"
         mc:Ignorable="d"
         Title="Chiclana Records" Height="900" Width="1380"
         WindowStyle="None"
@@ -18,7 +19,6 @@
         WindowStartupLocation="CenterScreen"
         >
 
-    
     <Border CornerRadius="12"
             Name="Border">
         <Border.Background>
@@ -73,13 +73,13 @@
 
 
 
-                            <TextBlock Text="{Binding SessionVM.CurrentUser.Email}"
-                               Foreground="White"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Center"
-                               Grid.Column="1"
-                               FontSize="20"
-                               MouseDown="TextBlock_MouseDown">
+                            <TextBlock Text="{Binding SessionVM.CurrentUser.Username}"
+                                       Foreground="White"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       Grid.Column="5"
+                                       FontSize="20"
+                                       MouseDown="TextBlock_MouseDown">
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock">
                                         <Style.Triggers>
@@ -98,33 +98,6 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-
-                            <TextBlock Text="Colecciones"
-                               Foreground="White"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Center"
-                               Grid.Column="3"
-                               FontSize="20"
-                               MouseDown="TextBlock_MouseDown">
-                                <TextBlock.Style>
-                                    <Style TargetType="TextBlock">
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver"
-                                             Value="True">
-                                                <Setter Property="Effect">
-                                                    <Setter.Value>
-                                                        <DropShadowEffect ShadowDepth="1" 
-                                                                  Color="White" 
-                                                                  Opacity="1" 
-                                                                  BlurRadius="10"/>
-                                                    </Setter.Value>
-                                                </Setter>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </TextBlock.Style>
-                            </TextBlock>
-
 
                             <Button Foreground="White"
                             FontSize="15"
@@ -209,20 +182,11 @@
                             <RadioButton Command="{Binding NavigateToHomeCommand}"
                                          Style="{StaticResource menuButton}"
                                          Tag="{StaticResource color1}"
-                                         IsEnabled="{Binding SessionVM.IsLoggedIn}">
+                                         IsEnabled="{Binding SessionVM.IsLoggedIn}"
+                                         IsChecked="True">
                                 <StackPanel Orientation="Horizontal">
                                     <fa:IconImage Icon="Home" Style="{StaticResource menuButtonIcon}"/>
                                     <TextBlock Text="Menú principal" Style="{StaticResource menuButtonText}"/>
-                                </StackPanel>
-                            </RadioButton>
-
-                            <RadioButton Command="{Binding NavigateToSettingsViewCommand}"
-                                         Style="{StaticResource menuButton}"
-                                         Tag="{StaticResource color2}"
-                                         IsEnabled="{Binding SessionVM.IsLoggedIn}">
-                                <StackPanel Orientation="Horizontal">
-                                    <fa:IconImage Icon="Box" Style="{StaticResource menuButtonIcon}"/>
-                                    <TextBlock Text="Ajustes" Style="{StaticResource menuButtonText}"/>
                                 </StackPanel>
                             </RadioButton>
 
@@ -231,8 +195,8 @@
                                          Tag="{StaticResource color3}"
                                          IsEnabled="{Binding SessionVM.IsLoggedIn}">
                                 <StackPanel Orientation="Horizontal">
-                                    <fa:IconImage Icon="Person" Style="{StaticResource menuButtonIcon}"/>
-                                    <TextBlock Text="Log in" Style="{StaticResource menuButtonText}"/>
+                                    <fa:IconImage Icon="BoxOpen" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Mi colección" Style="{StaticResource menuButtonText}"/>
                                 </StackPanel>
                             </RadioButton>
 
@@ -242,7 +206,17 @@
                                          IsEnabled="{Binding SessionVM.IsLoggedIn}">
                                 <StackPanel Orientation="Horizontal">
                                     <fa:IconImage Icon="RecordVinyl" Style="{StaticResource menuButtonIcon}"/>
-                                    <TextBlock Text="Buscar" Style="{StaticResource menuButtonText}"/>
+                                    <TextBlock Text="Buscar disco" Style="{StaticResource menuButtonText}"/>
+                                </StackPanel>
+                            </RadioButton>
+
+                            <RadioButton Command="{Binding NavigateToSettingsViewCommand}"
+                                         Style="{StaticResource menuButton}"
+                                         Tag="{StaticResource color10}"
+                                         IsEnabled="{Binding SessionVM.IsLoggedIn}">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:IconImage Icon="Tools" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Ajustes" Style="{StaticResource menuButtonText}"/>
                                 </StackPanel>
                             </RadioButton>
 
@@ -265,7 +239,7 @@
                                    Width="80"/>
                             <TextBlock Text="Chiclana Records"
                                        FontSize="26"
-                                       Foreground="{StaticResource color1}"/>
+                                       Foreground="{StaticResource color6}"/>
                         </StackPanel>
                     </Grid>
                 </Border>
