@@ -1,34 +1,20 @@
-# TODO: Chiclana Records desktop version
+# Chiclana Records versión de escritorio.
+Proyecto para la asignatura de Desarrollo de Interfaces por Pablo Antonio López Butrón
 
-## In Progress 🚧
-- [ ] Add user authentication
-- [ ] Database connection
+## Tecnologías
 
-## Planned 📋
-- [ ] Web and desktop connection
-
-## Completed ✅
-- [x] Initial project setup
-- [x] Basic UI layout
-- [x] Discogs API to search and store information about the records 
-
-## Future Ideas 💡
-- [ ] Integration with third-party services
-- [ ] Mobile app version
-- [ ] Analytics dashboard
-
-## Notes
-- Priority items marked with 🔥
-- Breaking changes marked with ⚠️
-- Items needing discussion marked with 💭
+- .NET
+- WPF
+- Arquitectura MVVM
+- API de discogs
+- Bases de datos en Supabase
 
 (WIP)
 
-first version
-![image](https://github.com/user-attachments/assets/4f15136a-fa3c-4322-9422-b5ad80d351bc)
+![image](https://github.com/user-attachments/assets/dd83c955-b6ec-4451-8f16-760e777fdbab)
 
-second version
-![image](https://github.com/user-attachments/assets/22c49011-681b-40dd-b9eb-075498394096)
+![image](https://github.com/user-attachments/assets/8770cd0e-6eea-4b88-8041-645399240d33)
 
-final version?
-![image](https://github.com/user-attachments/assets/666c2344-b534-4dd3-b7d4-1f11014d1714)
+![image](https://github.com/user-attachments/assets/2969c63d-2a5a-4db6-a80b-53fce08d4831)
+
+![image](https://github.com/user-attachments/assets/2f256085-0d02-4b94-a1e1-240d3cd5987a)
