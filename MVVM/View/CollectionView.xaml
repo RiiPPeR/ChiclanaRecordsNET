@@ -5,8 +5,175 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:ChiclanaRecordsNET.MVVM.View"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        
+             Height="850" Width="1130">
+    <Grid Background="#660B0500">
+        <ScrollViewer  VerticalScrollBarVisibility="Auto">
+
+            <ScrollViewer.Resources>
+                <Style x:Key="ScrollBarThumb" TargetType="{x:Type Thumb}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Thumb}">
+                                <Border CornerRadius="5" 
+                                Background="{StaticResource color2transparent}"/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+
+                <Style TargetType="{x:Type ScrollBar}">
+                    <Setter Property="Width" Value="8"/>
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ScrollBar}">
+                                <Grid>
+                                    <Border Background="Transparent"/>
+                                    <Track x:Name="PART_Track"
+                                           IsDirectionReversed="True">
+                                        <Track.Thumb>
+                                            <Thumb Style="{StaticResource ScrollBarThumb}"/>
+                                        </Track.Thumb>
+                                    </Track>
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ScrollViewer.Resources>
+            
+            <ItemsControl ItemsSource="{Binding Responses}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="3"
+                                     VerticalAlignment="Top"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Foreground="White"
+                                FontSize="15"
+                                FontWeight="Medium"
+                                Margin="5"
+                                Command="{Binding DataContext.RecordClicked, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                CommandParameter="{Binding}">
+                            <Grid>
+                                <Grid Margin="10, 5, 5, 5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Source="{Binding images[0].resource_url}" 
+                                           Width="50" Height="50"
+                                           Grid.Column="0"/>
+                                    <StackPanel Grid.Column="1"
+                                                Margin="10"
+                                                Height="auto">
+                                        <ScrollViewer HorizontalScrollBarVisibility="Hidden" 
+                                                      VerticalScrollBarVisibility="Hidden"
+                                                      IsHitTestVisible="False">
+                                            <TextBlock Name="ScrollingTitle"
+                                                       Text="{Binding title}"
+                                                       Foreground="White"
+                                                       Loaded="ScrollingTitle_Loaded"
+                                                       TextWrapping="NoWrap">
+                                                <TextBlock.RenderTransform>
+                                                    <TranslateTransform x:Name="ScrollTransform" X="0"/>
+                                                </TextBlock.RenderTransform>
+                                            </TextBlock>
+                                        </ScrollViewer>
+
+
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding country}"
+                                                       Foreground="White"/>
+                                            <TextBlock Text=", "
+                                                       Foreground="White"/>
+                                            <TextBlock Text="{Binding year}"
+                                                       Foreground="White"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding labels[0].name}"
+                                                       Foreground="White"/>
+                                            <TextBlock Text=" - "
+                                                       Foreground="White"/>
+                                            <TextBlock Text="{Binding labels[0].catno}"
+                                                       Foreground="White"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="{StaticResource color1transparent}"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                    <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                                    <Setter Property="RenderTransform">
+                                        <Setter.Value>
+                                            <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#99010409"/>
+                                            <Trigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                                                         To="1.055" 
+                                                                         Duration="0:0:0.2">
+                                                            <DoubleAnimation.EasingFunction>
+                                                                <CubicEase EasingMode="EaseOut"/>
+                                                            </DoubleAnimation.EasingFunction>
+                                                        </DoubleAnimation>
+                                                        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                                                         To="1.055" 
+                                                                         Duration="0:0:0.2">
+                                                            <DoubleAnimation.EasingFunction>
+                                                                <CubicEase EasingMode="EaseOut"/>
+                                                            </DoubleAnimation.EasingFunction>
+                                                        </DoubleAnimation>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </Trigger.EnterActions>
+                                            <Trigger.ExitActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                                                         To="1" 
+                                                                         Duration="0:0:0.2">
+                                                            <DoubleAnimation.EasingFunction>
+                                                                <CubicEase EasingMode="EaseOut"/>
+                                                            </DoubleAnimation.EasingFunction>
+                                                        </DoubleAnimation>
+                                                        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                                                         To="1" 
+                                                                         Duration="0:0:0.2">
+                                                            <DoubleAnimation.EasingFunction>
+                                                                <CubicEase EasingMode="EaseOut"/>
+                                                            </DoubleAnimation.EasingFunction>
+                                                        </DoubleAnimation>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </Trigger.ExitActions>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Width="356" Height="100"
+                                            CornerRadius="13"
+                                            Background="{TemplateBinding Background}">
+                                        <ContentPresenter VerticalAlignment="Center"
+                                                          HorizontalAlignment="Left"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
 </UserControl>

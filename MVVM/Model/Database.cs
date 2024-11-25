@@ -32,7 +32,6 @@ namespace ChiclanaRecordsNET.MVVM.Model
 
         [Column("created_at")]
         public DateTime CreatedAt { get; set; }
-
     }
     public class Database 
     {

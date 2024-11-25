@@ -57,6 +57,8 @@ namespace ChiclanaRecordsNET.MVVM.ViewModel
 
         private INavigationService _navigation;
 
+        public SessionViewModel SessionVM { get; }
+
         public INavigationService Navigation
         {
             get => _navigation;
@@ -67,10 +69,12 @@ namespace ChiclanaRecordsNET.MVVM.ViewModel
             }
         }
 
-        public SearchListViewModel(INavigationService navService)
+        public SearchListViewModel(INavigationService navService, SessionViewModel sessionVM)
         {
+            SessionVM = sessionVM;
             Navigation = navService;
             Responses = new BindableCollection<SearchResult>();
+
             SearchCommand = new RelayCommand(o =>
                 {
                     System.Diagnostics.Debug.WriteLine($"Artista: '{Artist}' Titulo: '{Title}' Pais: '{Country}' Cancion: '{Track}'");
@@ -82,12 +86,19 @@ namespace ChiclanaRecordsNET.MVVM.ViewModel
         public async void InitializeAsync(string artist, string title, string country, string track)
         {
             DiscogsSearch search = new DiscogsSearch();
-            var results = await search.GetSearchAsync(artist, title, country, track);
+            var (results, error) = await search.GetSearchAsync(artist, title, country, track);
 
             if (results?.Results != null && results.Results.Count > 0)
             {
                 Responses.Clear();
-                Responses.AddRange(results.Results);
+                //Responses.AddRange(results.Results);
+
+                foreach (var result in results.Results)
+                {
+                    result.IsInUserList = SessionVM.CurrentUser.Records.Contains(result.Id) ? true : false;
+                    Responses.Add(result);
+                }
+
                 System.Diagnostics.Debug.WriteLine($"{Responses.Count} resultados.");
             }
             else
@@ -105,6 +116,5 @@ namespace ChiclanaRecordsNET.MVVM.ViewModel
                 Navigation.NavigateTo<RecordViewModel>(selectedRecord.Id);
             }
         }
-
     }
 }

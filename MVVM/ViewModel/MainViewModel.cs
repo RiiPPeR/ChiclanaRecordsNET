@@ -34,8 +34,8 @@ namespace ChiclanaRecordsNET.MVVM.ViewModel
         public RelayCommand NavigateToLoginCommand { get; set; }
         public RelayCommand NavigateToSearchList { get; private set; }
         public RelayCommand NavigateToAcercaDe { get; private set; }
-        public RelayCommand CloseCommand { get; private set; }
-
+        public RelayCommand NavigateToCollection { get; set; }
+        
         public SessionViewModel SessionVM { get; }
 
 
@@ -49,6 +49,7 @@ namespace ChiclanaRecordsNET.MVVM.ViewModel
             NavigateToLoginCommand = new RelayCommand(o => { Navigation.NavigateTo<LoginViewModel>(); }, o => true);
             NavigateToSearchList = new RelayCommand(o => { Navigation.NavigateTo<SearchListViewModel>(); }, o => true);
             NavigateToAcercaDe = new RelayCommand(o => { Navigation.NavigateTo<AcercaDeViewModel>(); }, o => true);
+            NavigateToCollection = new RelayCommand(o => { Navigation.NavigateTo<CollectionViewModel>(); }, o => true);
 
             SessionVM = sessionViewModel;
         }

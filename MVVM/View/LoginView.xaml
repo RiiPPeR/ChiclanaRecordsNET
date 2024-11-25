@@ -63,19 +63,8 @@
                                FontWeight="Medium"                         
                                Margin="0,35,0,0"/>
                 <TextBox x:Name="txtUser"
-                             Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
-                             FontSize="13"
-                             FontWeight="Medium"                          
-                             Foreground="White"
-                             CaretBrush="LightGray"
-                             BorderBrush="DarkGray"
-                             BorderThickness="0,0,0,2"
-                             Height="28"
-                             VerticalContentAlignment="Center"
-                             Margin="0,5,0,0"
-                             Padding="20,0,0,0"
-                             Background="Transparent">
-                </TextBox>
+                        Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
+                        Style="{StaticResource CustomTextBoxStyle}"/>
                 <TextBlock Text="Contraseña"
                                Foreground="DarkGray"
                                FontSize="12"

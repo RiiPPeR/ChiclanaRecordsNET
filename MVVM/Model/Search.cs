@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net.Http;
 using System.Text.Json;
+using ChiclanaRecordsNET.Core;
 
 namespace ChiclanaRecordsNET.MVVM.Model
 {
@@ -22,7 +23,7 @@ namespace ChiclanaRecordsNET.MVVM.Model
             _client.DefaultRequestHeaders.Add("Authorization", $"Discogs token={userToken}");
         }
 
-        public async Task<SearchResponse> GetSearchAsync (string artist, string title, string country, string track)
+        public async Task<(SearchResponse, string? error)> GetSearchAsync (string artist, string title, string country, string track)
         {
             try
             {
@@ -36,7 +37,7 @@ namespace ChiclanaRecordsNET.MVVM.Model
                     PropertyNameCaseInsensitive = true
                 });
 
-                return search ?? new SearchResponse();
+                return (search ?? new SearchResponse(), null);
             }
             catch (HttpRequestException ex)
             {
@@ -68,7 +69,7 @@ public class PaginationUrls
     public string Next { get; set; }
 }
 
-public class SearchResult
+public class SearchResult 
 {
     public List<string> Style { get; set; }
     public string Thumb { get; set; }
@@ -88,6 +89,7 @@ public class SearchResult
     {
         get => Label.FirstOrDefault();
     }
+    public bool? IsInUserList { get; set; }
 }
 
 public class CommunityD

@@ -42,7 +42,7 @@ namespace ChiclanaRecordsNET.MVVM.View
             if (scrollTransform == null)
                 return;
 
-            if (textBlock.ActualWidth < 310) return;
+            if (textBlock.ActualWidth < 270) return;
 
             Duration duration;
 

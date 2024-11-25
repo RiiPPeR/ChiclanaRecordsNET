@@ -26,12 +26,21 @@ namespace ChiclanaRecordsNET.MVVM.Model
             _client.DefaultRequestHeaders.Add("Authorization", $"Discogs token={userToken}");
         }
 
-        public async Task<Album> GetReleaseAsync(int releaseId)
+        public async Task<(Album? album, string? error)> GetReleaseAsync(int releaseId)
         {
             try
             {
                 var response = await _client.GetAsync($"releases/{releaseId}");
-                response.EnsureSuccessStatusCode();
+
+                if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                {
+                    return (null, $"No se ha encontrado ningún disco con la id {releaseId}.");
+                }
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return (null, $"La solicitud de la API ha fallado con el código: {response.StatusCode}");
+                }
 
                 var content = await response.Content.ReadAsStringAsync();
                 var release = JsonSerializer.Deserialize<Album>(content, new JsonSerializerOptions
@@ -39,11 +48,11 @@ namespace ChiclanaRecordsNET.MVVM.Model
                     PropertyNameCaseInsensitive = true
                 });
 
-                return release;
+                return (release, null);
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error fetching release: {ex.Message}");
+                throw new Exception($"Error: {ex.Message}");
             }
         }
     }

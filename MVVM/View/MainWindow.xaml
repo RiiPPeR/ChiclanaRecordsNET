@@ -190,7 +190,7 @@
                                 </StackPanel>
                             </RadioButton>
 
-                            <RadioButton Command="{Binding NavigateToLoginCommand}"
+                            <RadioButton Command="{Binding NavigateToCollection}"
                                          Style="{StaticResource menuButton}"
                                          Tag="{StaticResource color3}"
                                          IsEnabled="{Binding SessionVM.IsLoggedIn}">
@@ -249,21 +249,6 @@
                             Content="{Binding Navigation.CurrentView}">
 
                 </ContentControl>
-
-
-                <Grid x:Name="ModalOverlay"
-                  Background="Transparent"
-                  Visibility="Collapsed">
-                    <Grid HorizontalAlignment="Center"
-                      VerticalAlignment="Center">
-                        <local:RecordView x:Name="RecordView" />
-                        <Button Content="Close" 
-                            Command="{Binding CloseModalCommand}" 
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Top"
-                            Margin="10"/>
-                    </Grid>
-                </Grid>
 
             </Grid>
         </Border>

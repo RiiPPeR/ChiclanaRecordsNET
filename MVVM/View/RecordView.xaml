@@ -29,35 +29,31 @@
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="100"/>
                     
                 </Grid.RowDefinitions>
                 
                 <StackPanel Grid.Row="0"
                             Orientation="Vertical" 
                             Width="460"
-                            Height="800"
+                            Height="700"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
                             Margin="10, 10, 0, 0">
 
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Nombre: "
-                       FontSize="20"
-                       Foreground="White"/>
+                                   Style="{StaticResource GlobalLabelStyle}" />
                         <TextBlock Text="{Binding Release.title, FallbackValue='Cargando...'}"
-                                   FontSize="20"
-                                   Foreground="{StaticResource color6}"
-                                   TextWrapping="Wrap"
-                                   Width="350"/>
+                                   Style="{StaticResource GlobalTextBlockStyle}" 
+                                   Width="300"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Artista: "
-                               FontSize="20"
-                               Foreground="White"/>
+                                   Style="{StaticResource GlobalLabelStyle}" />
                         <ItemsControl ItemsSource="{Binding Release.artists}"
-                          Width="1255">
+                                      Width="300">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <StackPanel Orientation="Horizontal"/>
@@ -68,11 +64,9 @@
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="{Binding name, FallbackValue='Loading...'}"
-                                       Foreground="{StaticResource color6}"
-                                       FontSize="20"/>
+                                                   Style="{StaticResource GlobalTextBlockStyle}"/>
                                         <TextBlock Text=" "
-                                       Foreground="{StaticResource color6}"
-                                       FontSize="20"/>
+                                                   Style="{StaticResource GlobalTextBlockStyle}"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
@@ -81,35 +75,28 @@
 
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="País: "
-                       FontSize="20"
-                       Foreground="White"/>
+                                   Style="{StaticResource GlobalLabelStyle}" />
                         <TextBlock Text="{Binding Release.country}"
-                       Foreground="{StaticResource color6}"
-                       FontSize="20"/>
+                                   Style="{StaticResource GlobalTextBlockStyle}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="ID: "
-                       FontSize="20"
-                       Foreground="White"/>
+                                   Style="{StaticResource GlobalLabelStyle}" />
                         <TextBlock Text="{Binding Release.id}"
-                       Foreground="{StaticResource color6}"
-                       FontSize="20"/>
+                                   Style="{StaticResource GlobalTextBlockStyle}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Lanzado: "
-                       FontSize="20"
-                       Foreground="White"/>
+                                   Style="{StaticResource GlobalLabelStyle}" />
                         <TextBlock Text="{Binding Release.released}"
-                       Foreground="{StaticResource color6}"
-                       FontSize="20"/>
+                                   Style="{StaticResource GlobalTextBlockStyle}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Label: "
-                               FontSize="20"
-                               Foreground="White"/>
+                                   Style="{StaticResource GlobalLabelStyle}" />
                         <ItemsControl ItemsSource="{Binding Release.labels}"
                                   Width="1255">
                             <ItemsControl.ItemsPanel>
@@ -122,11 +109,9 @@
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="{Binding catno, FallbackValue='Loading...'}"
-                                               Foreground="{StaticResource color6}"
-                                               FontSize="20"/>
+                                                   Style="{StaticResource GlobalTextBlockStyle}"/>
                                         <TextBlock Text=", "
-                                               Foreground="{StaticResource color6}"
-                                               FontSize="20"/>
+                                                   Style="{StaticResource GlobalTextBlockStyle}"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
@@ -135,19 +120,16 @@
 
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Rating: "
-                       FontSize="20"
-                       Foreground="White"/>
+                                   Style="{StaticResource GlobalLabelStyle}" />
                         <TextBlock Text="{Binding Release.community.rating.average}"
-                       Foreground="{StaticResource color6}"
-                       FontSize="20"/>
+                                   Style="{StaticResource GlobalTextBlockStyle}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Estilo: "
-                               FontSize="20"
-                               Foreground="White"/>
+                                   Style="{StaticResource GlobalLabelStyle}" />
                         <ItemsControl ItemsSource="{Binding Release.styles}"
-                                  Width="1255">
+                                  Width="400">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <StackPanel Orientation="Horizontal"/>
@@ -158,41 +140,118 @@
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="{Binding }"
-                                               Foreground="{StaticResource color6}"
-                                               FontSize="20"/>
+                                                   Style="{StaticResource GlobalTextBlockStyle}"/>
                                         <TextBlock Text=", "
-                                               Foreground="{StaticResource color6}"
-                                               FontSize="20"/>
+                                                   Style="{StaticResource GlobalTextBlockStyle}"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                     </StackPanel>
+
+                    <!--<StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Formatos: "
+                                   Style="{StaticResource GlobalLabelStyle}" />
+                        <ItemsControl ItemsSource="{Binding Release.formats}"
+                                  Width="365">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding descriptions[0]}"
+                                                   Style="{StaticResource GlobalTextBlockStyle}"/>
+                                        <TextBlock Text=", "
+                                                   Style="{StaticResource GlobalTextBlockStyle}"/>
+                                        <TextBlock Text="{Binding descriptions[1]}"
+                                                   Style="{StaticResource GlobalTextBlockStyle}"/>
+                                        <TextBlock Text=", "
+                                                   Style="{StaticResource GlobalTextBlockStyle}"/>
+                                        <TextBlock Text="{Binding descriptions[2]}"
+                                                   Style="{StaticResource GlobalTextBlockStyle}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>-->
+
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Formatos: "
+                                   Style="{StaticResource GlobalLabelStyle}" />
+                        <ItemsControl ItemsSource="{Binding Release.formats}"
+                                      Width="365">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Vertical"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <ItemsControl ItemsSource="{Binding descriptions}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Orientation="Horizontal"/>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding}"
+                                                               Style="{StaticResource GlobalTextBlockStyle}" />
+                                                    <TextBlock Text=", "
+                                                               Style="{StaticResource GlobalTextBlockStyle}" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Lo tienen: "
+                                   Style="{StaticResource GlobalLabelStyle}" />
+                        <TextBlock Text="{Binding Release.community.have}"
+                                   Style="{StaticResource GlobalTextBlockStyle}"/>
+                    </StackPanel>
+
                 </StackPanel>
 
-                <Button Content="Añadir disco a mi colección" 
-                        Grid.Row="1"
+                <Button Content="Añadir disco" 
+                        Grid.Row="2"
                         Command="{Binding AddRecord}" 
                         Foreground="White"
                         FontSize="25"
-                        VerticalAlignment="Bottom"
+                        VerticalAlignment="Top"
                         IsEnabled="{Binding IsAddable}"
+                        Margin="0, 10, 0 ,0"
                         >
 
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
-                            <Setter Property="Background" Value="{StaticResource color2}"/>
+                            <Setter Property="Background" Value="{StaticResource color8transparent}"/>
                             <Setter Property="Cursor" Value="Hand"/>
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
                                     <Setter Property="Background" Value="#99010409"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Visibility" Value="Hidden"/>
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
                     </Button.Style>
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
-                            <Border Width="360" Height="40"
+                            <Border Width="220" Height="40"
                                     CornerRadius="13"
                                     Background="{TemplateBinding Background}">
                                 <ContentPresenter VerticalAlignment="Center"
@@ -203,12 +262,13 @@
                     </Button.Template>
                 </Button>
 
-                <Button Content="Eliminar disco de mi colección." 
+                <Button Content="Eliminar disco" 
                         Grid.Row="2"
                         Command="{Binding DeleteRecord}" 
                         Foreground="White"
                         FontSize="25"
-                        VerticalAlignment="Bottom"
+                        VerticalAlignment="Top"
+                        Margin="0, 10, 0 ,0"
                         IsEnabled="{Binding IsDeletable}">
 
                     <Button.Style>
@@ -219,12 +279,15 @@
                                 <Trigger Property="IsMouseOver" Value="True">
                                     <Setter Property="Background" Value="#99010409"/>
                                 </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                </Trigger>
                             </Style.Triggers>
                         </Style>
                     </Button.Style>
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
-                            <Border Width="360" Height="40"
+                            <Border Width="220" Height="40"
                                     CornerRadius="13"
                                     Background="{TemplateBinding Background}">
                                 <ContentPresenter VerticalAlignment="Center"
@@ -405,7 +468,9 @@
                                 <Image Source="{Binding resource_url, FallbackValue='./../../Images/upscaled.png'}"
                                        Style="{StaticResource ImageHoverStyle}"
                                        MouseEnter="Image_MouseEnter"
-                                       MouseLeave="Image_MouseLeave"/>
+                                       MouseLeave="Image_MouseLeave">
+                                    
+                                </Image>
 
                                 <Popup x:Name="ImagePopup"
                                        PlacementTarget="{Binding ElementName=ParentControl}"

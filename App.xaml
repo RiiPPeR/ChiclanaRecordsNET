@@ -33,6 +33,9 @@
             <DataTemplate DataType="{x:Type viewModel:CreateUserViewModel}">
                 <view:CreateUserView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:CollectionViewModel}">
+                <view:CollectionView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
