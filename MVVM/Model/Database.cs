@@ -1,12 +1,11 @@
 ﻿using Supabase;
 using Supabase.Gotrue.Exceptions;
+using Supabase.Postgrest;
 using Supabase.Postgrest.Attributes;
-using Supabase.Postgrest.Exceptions;
 using Supabase.Postgrest.Models;
 using System.Configuration;
 using System.Runtime.InteropServices;
 using System.Security;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 
 namespace ChiclanaRecordsNET.MVVM.Model
@@ -24,16 +23,58 @@ namespace ChiclanaRecordsNET.MVVM.Model
         [Column("username")]
         public string Username { get; set; }
 
-        [Column("records")]
-        public List<int> Records { get; set; }
-
         [Column("friends")]
         public List<Guid> Friends { get; set; }
 
         [Column("created_at")]
         public DateTime CreatedAt { get; set; }
     }
-    public class Database 
+
+    // TODO: FALTA EL ARTISTA
+    [Table("records")]
+    public class Record : BaseModel
+    {
+        [PrimaryKey("discogs_id")]
+        [Column("discogs_id")]
+        public int DiscogsId { get; set; }
+
+        [Column("title")]
+        public string Title { get; set; }
+
+        [Column("image_url")]
+        public string ImageUrl { get; set; }
+
+        [Column("country")]
+        public string Country { get; set; }
+
+        [Column("year")]
+        public int Year { get; set; }
+
+        [Column("label")]
+        public string Label { get; set; }
+
+        [Column("catno")]
+        public string CatalogNumber { get; set; }
+    }
+
+    [Table("user_records")]
+    public class UserRecord : BaseModel
+    {
+        [PrimaryKey("id")]
+        [Column("id")]
+        public Guid Id { get; set; }
+
+        [Column("user_id")]
+        public Guid UserId { get; set; }
+
+        [Column("discogs_id")]
+        public int DiscogsId { get; set; }
+
+        [Column("added_at")]
+        public DateTime AddedAt { get; set; }
+    }
+
+    public class Database
     {
         private readonly Supabase.Client _supabase;
 
@@ -119,7 +160,6 @@ namespace ChiclanaRecordsNET.MVVM.Model
                         Id = Guid.Parse(authResponse.User.Id),
                         Username = username,
                         Email = email,
-                        Records = new List<int>(),
                         Friends = new List<Guid>(),
                         CreatedAt = DateTime.UtcNow
                     };
@@ -141,29 +181,138 @@ namespace ChiclanaRecordsNET.MVVM.Model
             }
         }
 
-        public async Task<(bool success, string? error)> AddRecordToCollection(Guid id, int record_id)
+
+        public async Task<List<Record>> GetUserRecords(Guid userId)
         {
             try
             {
-                var user = await _supabase.From<User>()
-                    .Where(x => x.Id == id)
-                    .Single();
+                // first get the users record associations
+                var userRecordsResponse = await _supabase
+                    .From<UserRecord>()
+                    .Filter("user_id", Constants.Operator.Equals, userId.ToString())
+                    .Get();
 
-                if (user == null)
+                if (!userRecordsResponse.Models.Any())
+                    return new List<Record>();
+
+                // then get the discogs_ids from the user records
+                var discogsIds = userRecordsResponse.Models.Select(ur => ur.DiscogsId).ToList();
+
+                // then get the actual records using those discogs_ids
+                var recordsResponse = await _supabase
+                    .From<Record>()
+                    .Filter("discogs_id", Constants.Operator.In, discogsIds)
+                    .Get();
+
+                return recordsResponse.Models.ToList();
+            }
+            catch
+            {
+                return new List<Record>();
+            }
+        }
+
+        public async Task<Record?> GetRecord(int discogsId)
+        {
+            try
+            {
+                var response = await _supabase
+                    .From<Record>()
+                    .Filter("discogs_id", Constants.Operator.Equals, discogsId)
+                    .Get();
+
+                return response.Models.FirstOrDefault();
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public async Task<List<Record>> SearchRecords(string searchTerm)
+        {
+            try
+            {
+                var response = await _supabase
+                    .From<Record>()
+                    .Filter("title", Constants.Operator.ILike, $"%{searchTerm}%")
+                    .Get();
+
+                return response.Models.ToList();
+            }
+            catch
+            {
+                return new List<Record>();
+            }
+        }
+
+        // TODO: NO LE HE PUESTO EL PUTO ARTISTA
+        public async Task<(bool success, string? error)> AddRecordToCollection(
+            Guid userId,
+            int discogsId,
+            string title,
+            string imageUrl,
+            string country,
+            int year,
+            string label,
+            string catalogNumber)
+        {
+            try
+            {
+                // does the record exist?
+                var existingRecordResponse = await _supabase
+                    .From<Record>()
+                    .Filter("discogs_id", Constants.Operator.Equals, discogsId)
+                    .Get();
+
+                var existingRecord = existingRecordResponse.Models.FirstOrDefault();
+
+                // if not, add it
+                if (existingRecord == null)
                 {
-                    return (false, "Usuario no encontrado");
+                    var record = new Record
+                    {
+                        DiscogsId = discogsId,
+                        Title = title,
+                        ImageUrl = imageUrl,
+                        Country = country,
+                        Year = year,
+                        Label = label,
+                        CatalogNumber = catalogNumber
+                    };
+
+                    await _supabase
+                        .From<Record>()
+                        .Insert(record);
                 }
 
-                if (user.Records.Contains(record_id))
+                // check if user has the record
+                var existingUserRecordResponse = await _supabase
+                    .From<UserRecord>()
+                    .Filter("user_id", Constants.Operator.Equals, userId.ToString())
+                    .Filter("discogs_id", Constants.Operator.Equals, discogsId)
+                    .Get();
+
+                var existingUserRecord = existingUserRecordResponse.Models.FirstOrDefault();
+
+                if (existingUserRecord != null)
                 {
                     return (false, "Ya has añadido ese disco.");
                 }
 
-                user.Records.Add(record_id);
+                // IMPLEMENT UUID FOR USER_RECORDS, IT ALWAYS TRIES TO PUT A 0 ON TO THE NEW RECORDS
+                // then add the userrecord
+                var userRecord = new UserRecord
+                {
+                    Id = Guid.NewGuid(),
+                    UserId = userId,
+                    DiscogsId = discogsId,
+                    AddedAt = DateTime.UtcNow
+                };
 
                 await _supabase
-                    .From<User>()
-                    .Update(user);
+                    .From<UserRecord>()
+                    .Insert(userRecord);
 
                 return (true, null);
             }
@@ -173,24 +322,30 @@ namespace ChiclanaRecordsNET.MVVM.Model
             }
         }
 
-        public async Task<(bool success, string? error)> DeleteRecordFromCollection(Guid id, int record_id)
+        public async Task<(bool success, string? error)> DeleteRecordFromCollection(Guid userId, int discogsId)
         {
             try
             {
-                var user = await _supabase.From<User>()
-                    .Where(x => x.Id == id)
-                    .Single();
-
-                if (user == null)
-                {
-                    return (false, "Usuario no encontrado");
-                }
-
-                user.Records.Remove(record_id);
-
                 await _supabase
-                    .From<User>()
-                    .Update(user);
+                    .From<UserRecord>()
+                    .Filter("user_id", Constants.Operator.Equals, userId.ToString())
+                    .Filter("discogs_id", Constants.Operator.Equals, discogsId)
+                    .Delete();
+
+                // TODO: implement if no one else has that record associated it gets deleted
+
+                var response = await _supabase
+                    .From<UserRecord>()
+                    .Filter("discogs_id", Constants.Operator.Equals, discogsId)
+                    .Get();
+
+                if (response.Model == null)
+                {
+                    await _supabase
+                        .From<Record>()
+                        .Filter("discogs_id", Constants.Operator.Equals, discogsId)
+                        .Delete();
+                }
 
                 return (true, null);
             }
@@ -199,6 +354,85 @@ namespace ChiclanaRecordsNET.MVVM.Model
                 return (false, ex.Message);
             }
         }
+
+        public async Task<bool> HasRecord(Guid userId, int discogsId)
+        {
+            try
+            {
+                var response = await _supabase
+                    .From<UserRecord>()
+                    .Filter("user_id", Constants.Operator.Equals, userId.ToString())
+                    .Filter("discogs_id", Constants.Operator.Equals, discogsId)
+                    .Get();
+
+                return response.Models.Any();
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
+
+    //public async Task<(bool success, string? error)> AddRecordToCollection(Guid id, int record_id)
+    //{
+    //    try
+    //    {
+    //        var user = await _supabase.From<User>()
+    //            .Where(x => x.Id == id)
+    //            .Single();
+
+    //        if (user == null)
+    //        {
+    //            return (false, "Usuario no encontrado");
+    //        }
+
+    //        if (user.Records.Contains(record_id))
+    //        {
+    //            return (false, "Ya has añadido ese disco.");
+    //        }
+
+    //        user.Records.Add(record_id);
+
+    //        await _supabase
+    //            .From<User>()
+    //            .Update(user);
+
+    //        return (true, null);
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        return (false, ex.Message);
+    //    }
+    //}
+
+    //public async Task<(bool success, string? error)> DeleteRecordFromCollection(Guid id, int record_id)
+    //{
+    //    try
+    //    {
+    //        var user = await _supabase.From<User>()
+    //            .Where(x => x.Id == id)
+    //            .Single();
+
+    //        if (user == null)
+    //        {
+    //            return (false, "Usuario no encontrado");
+    //        }
+
+    //        user.Records.Remove(record_id);
+
+    //        await _supabase
+    //            .From<User>()
+    //            .Update(user);
+
+    //        return (true, null);
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        return (false, ex.Message);
+    //    }
+    //}
+
 }
+
 

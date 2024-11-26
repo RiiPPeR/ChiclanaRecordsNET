@@ -58,8 +58,19 @@ namespace ChiclanaRecordsNET.MVVM.ViewModel
                 Id = idValue;
                 InitializeAsync();
 
-                IsDeletable = SessionVM.CurrentUser.Records.Contains(idValue) ? true : false;
-                IsAddable = SessionVM.CurrentUser.Records.Contains(idValue) ? false : true;
+                IsDeletable = false;
+                IsAddable = true;
+
+                foreach (var record in SessionVM.Records)
+                {
+                    if (record.DiscogsId == idValue)
+                    {
+                        IsDeletable = true;
+                        IsAddable = false;
+                        break;
+                    }
+                }
+
                 System.Diagnostics.Debug.WriteLine($"Se puede eliminar: {IsDeletable}");
             }
         }
@@ -69,34 +80,58 @@ namespace ChiclanaRecordsNET.MVVM.ViewModel
             SessionVM = sessionVM;
             Navigation = navService;
 
-            AddRecord = new RelayCommand( o => { AddRecordF(SessionVM.CurrentUser.Id, Id); }, o => true);
-            DeleteRecord = new RelayCommand( o => { DeleteRecordF(SessionVM.CurrentUser.Id, Id); }, o => true);
+            AddRecord = new RelayCommand( o => { AddRecordF(); }, o => true);
+            DeleteRecord = new RelayCommand( o => { DeleteRecordF(); }, o => true);
         }
 
-        public async void AddRecordF(Guid id, int record_id)
+        public async void AddRecordF()
         {
-            Database query = new Database();
-            var results = await query.AddRecordToCollection(id, record_id);
-
-            if (!SessionVM.CurrentUser.Records.Contains(record_id))
+            if (Release != null)
             {
-                SessionVM.CurrentUser.Records.Add(record_id);
-            }
+                Database query = new Database();
+                var results = await query.AddRecordToCollection(
+                    SessionVM.CurrentUser.Id,
+                    Release.id,
+                    Release.title,
+                    Release.images[0].resource_url,
+                    Release.country,
+                    Release.year,
+                    Release.labels[0].name,
+                    Release.labels[0].catno);
 
-            Navigation.NavigateTo<RecordViewModel>(record_id);
+                SessionVM.Records.Add(new Record
+                {
+                    DiscogsId = Release.id,
+                    Title = Release.title,
+                    ImageUrl = Release.images[0].resource_url,
+                    Country = Release.country,
+                    Year = Release.year,
+                    Label = Release.labels[0].name,
+                    CatalogNumber = Release.labels[0].catno
+                });
+                OnPropertyChanged(nameof(SessionVM.Records));
+
+                Navigation.NavigateTo<RecordViewModel>(Release.id);
+            }
         } 
 
-        public async void DeleteRecordF(Guid id, int record_id)
+        public async void DeleteRecordF()
         {
             Database query = new Database();
-            var results = await query.DeleteRecordFromCollection(id, record_id);
+            var results = await query.DeleteRecordFromCollection(
+                    SessionVM.CurrentUser.Id,
+                    Release.id);
 
-            if (SessionVM.CurrentUser.Records.Contains(record_id))
+            foreach (var record in SessionVM.Records)
             {
-                SessionVM.CurrentUser.Records.Remove(record_id);
+                if (record.DiscogsId == Release.id)
+                {
+                    SessionVM.Records.Remove(record);
+                    break;
+                }
             }
 
-            Navigation.NavigateTo<RecordViewModel>(record_id);
+            Navigation.NavigateTo<RecordViewModel>(Release.id);
         }
 
         public async void InitializeAsync()

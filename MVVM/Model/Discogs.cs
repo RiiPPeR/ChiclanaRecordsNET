@@ -147,7 +147,7 @@ namespace ChiclanaRecordsNET.MVVM.Model
     public class Album
     {
         public string title { get; set; }
-        public int? id { get; set; }
+        public int id { get; set; }
         public List<Artist> artists { get; set; }
         public string data_quality { get; set; }
         public string thumb { get; set; }
@@ -178,7 +178,7 @@ namespace ChiclanaRecordsNET.MVVM.Model
         public List<Tracklist> tracklist { get; set; }
         public string uri { get; set; }
         public List<Video> videos { get; set; }
-        public int? year { get; set; }
+        public int year { get; set; }
     }
 
     public class Submitter

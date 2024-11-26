@@ -319,7 +319,7 @@
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Thumb}">
                                         <Border CornerRadius="5" 
-                                        Background="{StaticResource color2transparent}"/>
+                                        Background="{StaticResource color1transparent}"/>
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
@@ -427,7 +427,7 @@
                             <Setter.Value>
                                 <ControlTemplate TargetType="{x:Type Thumb}">
                                     <Border CornerRadius="5" 
-                                        Background="{StaticResource color2transparent}"/>
+                                        Background="{StaticResource color1transparent}"/>
                                 </ControlTemplate>
                             </Setter.Value>
                         </Setter>

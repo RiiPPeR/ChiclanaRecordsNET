@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using ChiclanaRecordsNET.Core;
 using ChiclanaRecordsNET.MVVM.Model;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 
@@ -51,7 +52,20 @@ namespace ChiclanaRecordsNET.MVVM.ViewModel
             }
         }
 
-        public BindableCollection<SearchResult> Responses { get; set; }
+        //public BindableCollection<SearchResult> Responses { get; set; }
+
+
+        public ObservableCollection<SearchResult> _respones;
+        public ObservableCollection<SearchResult> Responses
+        {
+            get => _respones;
+            set
+            {
+                _respones = value;
+                OnPropertyChanged(nameof(Responses));
+            }
+        }
+
         public ICommand SearchCommand { get; }
         public ICommand RecordClicked { get; }
 
@@ -73,7 +87,7 @@ namespace ChiclanaRecordsNET.MVVM.ViewModel
         {
             SessionVM = sessionVM;
             Navigation = navService;
-            Responses = new BindableCollection<SearchResult>();
+            Responses = new ObservableCollection<SearchResult>();
 
             SearchCommand = new RelayCommand(o =>
                 {
@@ -95,7 +109,27 @@ namespace ChiclanaRecordsNET.MVVM.ViewModel
 
                 foreach (var result in results.Results)
                 {
-                    result.IsInUserList = SessionVM.CurrentUser.Records.Contains(result.Id) ? true : false;
+                    //result.IsInUserList = SessionVM.Records.Contains(result.Id) ? true : false;
+                    if (SessionVM.Records != null)
+                    {
+                        foreach (var record in SessionVM.Records)
+                        {
+                            if (record.DiscogsId == result.Id)
+                            {
+                                result.IsInUserList = true;
+                                break;
+                            }
+                            else
+                            {
+                                result.IsInUserList = false;
+                            }
+                        }
+
+                    } 
+                    else
+                    {
+                        result.IsInUserList = false;
+                    }
                     Responses.Add(result);
                 }
 

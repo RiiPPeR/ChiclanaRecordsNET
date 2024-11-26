@@ -20,6 +20,18 @@ namespace ChiclanaRecordsNET.MVVM.ViewModel
             }
         }
 
+        private static List<Record> _records = new List<Record>();
+
+        public static List<Record> Records
+        {
+            get => _records;
+            set
+            {
+                _records = value;
+                StaticPropertyChanged?.Invoke(null, new PropertyChangedEventArgs(nameof(Records)));
+            }
+        }
+
         public static event PropertyChangedEventHandler StaticPropertyChanged;
         public event PropertyChangedEventHandler PropertyChanged;
     }
@@ -132,6 +144,12 @@ namespace ChiclanaRecordsNET.MVVM.ViewModel
                 {
                     Session.User = user;
                     System.Diagnostics.Debug.WriteLine($"User logged in: {user.Username}, Email: {user.Email}");
+
+                    var records = await _db.GetUserRecords(user.Id);
+                    Session.Records = records;
+
+                    System.Diagnostics.Debug.WriteLine($"Records retrieved: {records?.Count ?? 0}");
+
                     IsViewVisible = false;  
                     Navigation.NavigateTo<HomeViewModel>();
                     

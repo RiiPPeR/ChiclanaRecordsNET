@@ -7,7 +7,9 @@
              mc:Ignorable="d"
              Height="850" Width="1130">
     <Grid Background="#660B0500">
-        <ScrollViewer  VerticalScrollBarVisibility="Auto">
+        <ScrollViewer  VerticalScrollBarVisibility="Auto"
+                       Width="1110"
+                       HorizontalAlignment="Left">
 
             <ScrollViewer.Resources>
                 <Style x:Key="ScrollBarThumb" TargetType="{x:Type Thumb}">
@@ -15,7 +17,7 @@
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type Thumb}">
                                 <Border CornerRadius="5" 
-                                Background="{StaticResource color2transparent}"/>
+                                Background="{StaticResource color1transparent}"/>
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
@@ -54,16 +56,17 @@
                         <Button Foreground="White"
                                 FontSize="15"
                                 FontWeight="Medium"
-                                Margin="5"
-                                Command="{Binding DataContext.RecordClicked, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                                CommandParameter="{Binding}">
+                                Margin="10, 10, 10, 10"
+                                Command="{Binding DataContext.NavigateToRecord, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                CommandParameter="{Binding }"
+                                Width="auto">
                             <Grid>
                                 <Grid Margin="10, 5, 5, 5">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="50"/>
                                         <ColumnDefinition Width="auto"/>
                                     </Grid.ColumnDefinitions>
-                                    <Image Source="{Binding images[0].resource_url}" 
+                                    <Image Source="{Binding ImageUrl}" 
                                            Width="50" Height="50"
                                            Grid.Column="0"/>
                                     <StackPanel Grid.Column="1"
@@ -73,7 +76,7 @@
                                                       VerticalScrollBarVisibility="Hidden"
                                                       IsHitTestVisible="False">
                                             <TextBlock Name="ScrollingTitle"
-                                                       Text="{Binding title}"
+                                                       Text="{Binding Title}"
                                                        Foreground="White"
                                                        Loaded="ScrollingTitle_Loaded"
                                                        TextWrapping="NoWrap">
@@ -85,19 +88,19 @@
 
 
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding country}"
+                                            <TextBlock Text="{Binding Country}"
                                                        Foreground="White"/>
                                             <TextBlock Text=", "
                                                        Foreground="White"/>
-                                            <TextBlock Text="{Binding year}"
+                                            <TextBlock Text="{Binding Year}"
                                                        Foreground="White"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding labels[0].name}"
+                                            <TextBlock Text="{Binding Label}"
                                                        Foreground="White"/>
                                             <TextBlock Text=" - "
                                                        Foreground="White"/>
-                                            <TextBlock Text="{Binding labels[0].catno}"
+                                            <TextBlock Text="{Binding CatalogNumber}"
                                                        Foreground="White"/>
                                         </StackPanel>
                                     </StackPanel>
@@ -162,7 +165,7 @@
                             </Button.Style>
                             <Button.Template>
                                 <ControlTemplate TargetType="Button">
-                                    <Border Width="356" Height="100"
+                                    <Border Width="330" Height="100"
                                             CornerRadius="13"
                                             Background="{TemplateBinding Background}">
                                         <ContentPresenter VerticalAlignment="Center"
